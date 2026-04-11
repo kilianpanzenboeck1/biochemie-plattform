@@ -1,0 +1,29 @@
+{
+  "name": "biochemie-lernplattform-dpu",
+  "version": "2.0.0",
+  "description": "Interaktive Biochemie-Lernplattform für DPU Vorklinik – Karteikarten, Quiz, Prüfungsmodus (SRS), Suchfunktion, Statistiken",
+  "homepage": ".",
+  "private": true,
+  "scripts": {
+    "start": "npx serve . --port 3000",
+    "dev": "npx serve . --port 3000 --open",
+    "serve": "python3 -m http.server 8080"
+  },
+  "keywords": [
+    "biochemie",
+    "lernplattform",
+    "medizin",
+    "vorklinik",
+    "flashcards",
+    "spaced-repetition",
+    "DPU"
+  ],
+  "author": "DPU Vorklinik",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}
