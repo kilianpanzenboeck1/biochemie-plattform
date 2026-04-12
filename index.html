@@ -1,1 +1,1620 @@
-<svg class="sidebar-logo-img" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" width="40" height="40"><defs><linearGradient id="dpuGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1565C0"/><stop offset="100%" stop-color="#0097A7"/></linearGradient></defs><rect width="52" height="52" rx="12" fill="url(#dpuGrad)"/><path d="M8 16 Q16 10 24 16 Q32 22 40 16" stroke="#80DEEA" stroke-width="1.8" fill="none" opacity="0.7"/><path d="M8 20 Q16 14 24 20 Q32 26 40 20" stroke="#80DEEA" stroke-width="1.2" fill="none" opacity="0.4"/><path d="M8 36 Q16 30 24 36 Q32 42 40 36" stroke="#80DEEA" stroke-width="1.8" fill="none" opacity="0.7"/><path d="M8 40 Q16 34 24 40 Q32 46 40 40" stroke="#80DEEA" stroke-width="1.2" fill="none" opacity="0.4"/><text x="26" y="31" font-family="Inter,system-ui,sans-serif" font-size="15" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="-0.5">DP4U</text></svg><div class="sidebar-logo-text"><span class="sidebar-logo-title">DP4U Studyhub</span><span class="sidebar-logo-sub">DPU Vorklinik</span></div>
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proteine & Enzyme – Lernplattform DPU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3rem);
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem; --space-20: 5rem;
+  --radius-sm: 0.375rem; --radius-md: 0.5rem;
+  --radius-lg: 0.75rem; --radius-xl: 1rem; --radius-full: 9999px;
+  --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --content-default: 1100px;
+}
+
+[data-theme="dark"] {
+  --bg: #0d0f14;
+  --surface: #13151c;
+  --surface-2: #1a1d26;
+  --surface-3: #1f2330;
+  --border: #252936;
+  --border-bright: #2e3345;
+  --text: #e2e4ed;
+  --text-muted: #8b8fa8;
+  --text-faint: #4a4e63;
+  --accent: #6c8aff;
+  --accent-hover: #8aa0ff;
+  --accent-bg: rgba(108,138,255,0.12);
+  --accent-glow: rgba(108,138,255,0.25);
+  --green: #4ade80;
+  --green-bg: rgba(74,222,128,0.12);
+  --red: #f87171;
+  --red-bg: rgba(248,113,113,0.12);
+  --yellow: #fbbf24;
+  --yellow-bg: rgba(251,191,36,0.12);
+  --purple: #a78bfa;
+  --purple-bg: rgba(167,139,250,0.12);
+  --teal: #2dd4bf;
+  --teal-bg: rgba(45,212,191,0.12);
+  --orange: #fb923c;
+  --orange-bg: rgba(251,146,60,0.12);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.6);
+}
+
+[data-theme="light"] {
+  --bg: #f4f5f9;
+  --surface: #ffffff;
+  --surface-2: #f8f9fc;
+  --surface-3: #eef0f7;
+  --border: #dde0ec;
+  --border-bright: #c8ccdf;
+  --text: #1a1d2e;
+  --text-muted: #5a5f7a;
+  --text-faint: #9da2bc;
+  --accent: #4a6ef5;
+  --accent-hover: #3a5ee0;
+  --accent-bg: rgba(74,110,245,0.08);
+  --accent-glow: rgba(74,110,245,0.2);
+  --green: #16a34a;
+  --green-bg: rgba(22,163,74,0.1);
+  --red: #dc2626;
+  --red-bg: rgba(220,38,38,0.1);
+  --yellow: #d97706;
+  --yellow-bg: rgba(217,119,6,0.1);
+  --purple: #7c3aed;
+  --purple-bg: rgba(124,58,237,0.1);
+  --teal: #0d9488;
+  --teal-bg: rgba(13,148,136,0.1);
+  --orange: #ea580c;
+  --orange-bg: rgba(234,88,12,0.1);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+}
+
+/* ===== BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100dvh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; }
+a, button, [role="button"] { transition: color var(--transition), background var(--transition), border-color var(--transition), opacity var(--transition), transform var(--transition); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius-sm); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+/* ===== HEADER ===== */
+.app-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.header-inner {
+  max-width: var(--content-default);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+.logo-icon {
+  width: 36px; height: 36px;
+}
+.logo-text {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.logo-text span { display: block; color: var(--text-muted); font-weight: 400; font-size: var(--text-xs); }
+
+/* VL Selector */
+.vl-nav {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: center;
+}
+.vl-btn {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.vl-btn:hover { color: var(--text); background: var(--surface-3); }
+.vl-btn.active {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-color: var(--accent-glow);
+}
+
+/* Header controls */
+.header-controls { display: flex; gap: var(--space-2); align-items: center; flex-shrink: 0; }
+.icon-btn {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.icon-btn:hover { color: var(--text); background: var(--surface-3); }
+
+/* ===== MAIN TABS ===== */
+.tab-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 65px; z-index: 90;
+}
+.tab-bar-inner {
+  max-width: var(--content-default);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  display: flex;
+  gap: 0;
+}
+.tab-btn {
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ===== PAGE LAYOUT ===== */
+.page { display: none; }
+.page.active { display: block; }
+.page-inner {
+  max-width: var(--content-default);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6);
+}
+
+/* ===== VL HERO BANNER ===== */
+.vl-hero {
+  background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-10);
+  margin-bottom: var(--space-8);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+.vl-badge {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+  background: var(--accent-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-6);
+  line-height: 1;
+}
+.vl-hero-content h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+.vl-hero-content p { color: var(--text-muted); max-width: 600px; }
+
+/* ===== ÜBERSICHT (SUMMARY) ===== */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-5);
+}
+.topic-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.topic-card:hover { border-color: var(--border-bright); box-shadow: var(--shadow-sm); }
+.topic-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+.topic-icon {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.topic-card h3 {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+.topic-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.topic-card ul li {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  max-width: 100%;
+}
+.topic-card ul li::before {
+  content: '→';
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.formula-box {
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-family: 'Courier New', monospace;
+  font-size: var(--text-xs);
+  color: var(--teal);
+  margin-top: var(--space-3);
+}
+
+/* ===== KARTEIKARTEN ===== */
+.cards-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  margin-bottom: var(--space-6);
+}
+.category-pills {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  flex: 1;
+}
+.pill {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: var(--surface);
+}
+.pill:hover { border-color: var(--accent); color: var(--accent); }
+.pill.active { background: var(--accent-bg); color: var(--accent); border-color: var(--accent-glow); }
+
+.cards-controls { display: flex; gap: var(--space-2); }
+.btn-secondary {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: var(--surface);
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  background: var(--accent);
+  color: white;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Progress */
+.card-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.progress-bar-outer {
+  flex: 1;
+  height: 6px;
+  background: var(--surface-3);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.progress-bar-inner {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+.progress-label { font-size: var(--text-xs); color: var(--text-muted); white-space: nowrap; }
+
+/* Flashcard */
+.flashcard-container {
+  perspective: 1200px;
+  max-width: 680px;
+  margin: 0 auto var(--space-6);
+}
+.flashcard {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.flashcard-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-10);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+.flashcard-front {
+  background: var(--surface);
+}
+.flashcard-back {
+  background: var(--surface-2);
+  transform: rotateY(180deg);
+}
+.flashcard-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+  margin-bottom: var(--space-4);
+}
+.flashcard-front .flashcard-label { color: var(--accent); }
+.flashcard-q {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+}
+.flashcard-a {
+  font-size: var(--text-base);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.flashcard-hint {
+  text-align: center;
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  margin-bottom: var(--space-4);
+}
+.flashcard-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+.nav-btn {
+  width: 44px; height: 44px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  background: var(--surface);
+}
+.nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+.nav-counter { font-size: var(--text-sm); font-weight: 600; color: var(--text-muted); min-width: 60px; text-align: center; }
+
+/* card category tag */
+.card-cat-tag {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+/* ===== QUIZ ===== */
+.quiz-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.quiz-score-display {
+  margin-left: auto;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--green);
+  background: var(--green-bg);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+}
+.quiz-question {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-8);
+  margin-bottom: var(--space-5);
+}
+.quiz-q-number {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+.quiz-q-text {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-6);
+  line-height: 1.4;
+}
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.quiz-option {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border);
+  background: var(--surface-2);
+  text-align: left;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: all var(--transition);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+.quiz-option:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-bg); }
+.quiz-option:disabled { cursor: default; }
+.quiz-option.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+.quiz-option.wrong { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+.quiz-option.missed { border-color: var(--yellow); background: var(--yellow-bg); }
+.option-letter {
+  width: 24px; height: 24px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.quiz-option.correct .option-letter { background: var(--green); color: white; }
+.quiz-option.wrong .option-letter { background: var(--red); color: white; }
+.explanation-box {
+  margin-top: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--surface-3);
+  border-left: 3px solid var(--accent);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  display: none;
+}
+.explanation-box.visible { display: block; animation: fadeIn 0.3s ease; }
+.quiz-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+/* Results screen */
+.quiz-results {
+  text-align: center;
+  padding: var(--space-12) var(--space-8);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+}
+.results-score {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--accent);
+  margin: var(--space-4) 0;
+}
+.results-emoji { font-size: 64px; }
+.results-msg { color: var(--text-muted); margin-bottom: var(--space-6); }
+
+/* ===== TABELLEN ===== */
+.table-section { margin-bottom: var(--space-10); }
+.table-section h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+thead tr {
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+}
+thead th {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+tbody tr { border-bottom: 1px solid var(--border); transition: background var(--transition); }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--surface-3); }
+tbody td {
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-muted);
+  vertical-align: top;
+}
+tbody td:first-child { font-weight: 600; color: var(--text); }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.tag-blue { background: var(--accent-bg); color: var(--accent); }
+.tag-green { background: var(--green-bg); color: var(--green); }
+.tag-purple { background: var(--purple-bg); color: var(--purple); }
+.tag-orange { background: var(--orange-bg); color: var(--orange); }
+.tag-teal { background: var(--teal-bg); color: var(--teal); }
+.tag-red { background: var(--red-bg); color: var(--red); }
+.tag-yellow { background: var(--yellow-bg); color: var(--yellow); }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+.fade-in { animation: fadeIn 0.3s ease forwards; }
+
+/* ===== EMPTY / LOADING ===== */
+.empty-state {
+  text-align: center;
+  padding: var(--space-16);
+  color: var(--text-faint);
+}
+
+/* ===== SECTION DIVIDERS ===== */
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ===== OVERVIEW INFO CARDS ===== */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.info-card-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.info-num {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--accent);
+}
+.info-label { font-size: var(--text-xs); color: var(--text-muted); }
+
+/* ===== MOBILE ===== */
+@media (max-width: 640px) {
+  .header-inner { padding: var(--space-3); flex-wrap: wrap; }
+  .vl-nav { order: 3; width: 100%; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: var(--space-1); }
+  .page-inner { padding: var(--space-5) var(--space-4); }
+  .vl-hero { flex-direction: column; padding: var(--space-5); }
+  .tab-btn { padding: var(--space-3) var(--space-4); }
+  .flashcard-face { padding: var(--space-6); }
+  .quiz-question { padding: var(--space-5); }
+  .overview-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="logo">
+<svg class="logo-icon" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" width="36" height="36" aria-label="DP4U Logo">
+          <defs><linearGradient id="dpuGradHdr" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1565C0"/><stop offset="100%" stop-color="#0097A7"/></linearGradient></defs>
+          <rect width="52" height="52" rx="12" fill="url(#dpuGradHdr)"/>
+          <path d="M8 16 Q16 10 24 16 Q32 22 40 16" stroke="#80DEEA" stroke-width="1.8" fill="none" opacity="0.7"/>
+          <path d="M8 20 Q16 14 24 20 Q32 26 40 20" stroke="#80DEEA" stroke-width="1.2" fill="none" opacity="0.4"/>
+          <path d="M8 36 Q16 30 24 36 Q32 42 40 36" stroke="#80DEEA" stroke-width="1.8" fill="none" opacity="0.7"/>
+          <path d="M8 40 Q16 34 24 40 Q32 46 40 40" stroke="#80DEEA" stroke-width="1.2" fill="none" opacity="0.4"/>
+          <text x="26" y="31" font-family="Inter,system-ui,sans-serif" font-size="15" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="-0.5">DP4U</text>
+        </svg>
+        <div class="logo-text">DP4U Studyhub<span>DPU Vorklinik</span></div>
+    </div>
+
+    <nav class="vl-nav" aria-label="Vorlesungen">
+      <button class="vl-btn active" data-vl="vl01">VL01</button>
+      <button class="vl-btn" data-vl="vl02">VL02</button>
+      <button class="vl-btn" data-vl="vl03">VL03</button>
+      <button class="vl-btn" data-vl="vl04">VL04</button>
+      <button class="vl-btn" data-vl="vl05">VL05</button>
+      <button class="vl-btn" data-vl="vl06">VL06</button>
+      <button class="vl-btn" data-vl="vl07">VL07</button>
+      <button class="vl-btn" data-vl="vl08">VL08</button>
+      <button class="vl-btn" data-vl="vl09">VL09</button>
+      <button class="vl-btn" data-vl="all">Alle</button>
+    </nav>
+
+    <div class="header-controls">
+      <button class="icon-btn" data-theme-toggle aria-label="Theme umschalten">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== TAB BAR ===== -->
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <button class="tab-btn active" data-tab="uebersicht">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Übersicht
+    </button>
+    <button class="tab-btn" data-tab="karteikarten">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      Karteikarten
+    </button>
+    <button class="tab-btn" data-tab="quiz">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/></svg>
+      Quiz
+    </button>
+    <button class="tab-btn" data-tab="tabellen">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+      Tabellen
+    </button>
+  </div>
+</div>
+
+<!-- ===== PAGES ===== -->
+<main>
+
+<!-- ======= ÜBERSICHT PAGE ======= -->
+<div id="page-uebersicht" class="page active">
+  <div class="page-inner">
+    <div id="overview-content"></div>
+  </div>
+</div>
+
+<!-- ======= KARTEIKARTEN PAGE ======= -->
+<div id="page-karteikarten" class="page">
+  <div class="page-inner">
+    <div class="cards-toolbar">
+      <div class="category-pills" id="category-pills"></div>
+      <div class="cards-controls">
+        <button class="btn-secondary" id="shuffle-btn">🔀 Shuffle</button>
+        <button class="btn-secondary" id="reset-btn">↺ Reset</button>
+      </div>
+    </div>
+    <div class="card-progress">
+      <div class="progress-bar-outer">
+        <div class="progress-bar-inner" id="card-progress-bar" style="width:0%"></div>
+      </div>
+      <span class="progress-label" id="card-progress-label">0 / 0</span>
+    </div>
+    <p class="flashcard-hint">Klick auf die Karte zum Umdrehen</p>
+    <div class="flashcard-container">
+      <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="Karteikarte umdrehen">
+        <div class="flashcard-face flashcard-front">
+          <div class="flashcard-label">Frage</div>
+          <div class="flashcard-q" id="card-front-text">Bereit? Klick auf „Reset" um zu starten!</div>
+          <div class="card-cat-tag tag tag-blue" id="card-cat-tag"></div>
+        </div>
+        <div class="flashcard-face flashcard-back">
+          <div class="flashcard-label">Antwort</div>
+          <div class="flashcard-a" id="card-back-text"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flashcard-nav">
+      <button class="nav-btn" id="prev-btn" aria-label="Zurück">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="nav-counter" id="nav-counter">- / -</span>
+      <button class="nav-btn" id="next-btn" aria-label="Weiter">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= QUIZ PAGE ======= -->
+<div id="page-quiz" class="page">
+  <div class="page-inner">
+    <div id="quiz-container"></div>
+  </div>
+</div>
+
+<!-- ======= TABELLEN PAGE ======= -->
+<div id="page-tabellen" class="page">
+  <div class="page-inner">
+    <div id="tables-content"></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// =========================================================
+// DATA — All extracted content from VL01–VL09
+// =========================================================
+
+const VL_META = {
+  vl01: { label: 'VL01', title: 'Proteine: Eine Einführung', color: 'tag-blue', emoji: '🧬' },
+  vl02: { label: 'VL02', title: 'Proteine als Werkzeuge der Zellen', color: 'tag-teal', emoji: '⚙️' },
+  vl03: { label: 'VL03', title: 'Primär- & Sekundärstruktur', color: 'tag-green', emoji: '🔗' },
+  vl04: { label: 'VL04', title: 'Tertiär- & Quartärstruktur', color: 'tag-purple', emoji: '🏗️' },
+  vl05: { label: 'VL05', title: 'Evolution & Proteindatenbanken', color: 'tag-orange', emoji: '🌿' },
+  vl06: { label: 'VL06', title: 'Proteine als Katalysatoren', color: 'tag-yellow', emoji: '⚗️' },
+  vl07: { label: 'VL07', title: 'Mechanismen der Katalyse', color: 'tag-red', emoji: '🔬' },
+  vl08: { label: 'VL08', title: 'Bestimmung der Enzymaktivität', color: 'tag-blue', emoji: '📊' },
+  vl09: { label: 'VL09', title: 'Regulation der Enzymaktivität', color: 'tag-purple', emoji: '🎛️' },
+};
+
+// ---- OVERVIEW DATA ----
+const OVERVIEW_DATA = {
+  vl01: {
+    topics: [
+      { icon: '🧬', color: 'var(--accent-bg)', title: 'Definition & Vorkommen', points: ['10–15% tierischer Zellmasse (nach Wasser)', 'Elemente: C, N, O, H, S', 'Lineare Polymere aus Aminosäuren'], formula: null },
+      { icon: '🏛️', color: 'var(--purple-bg)', title: 'Strukturhierarchie', points: ['Primär: Aminosäuresequenz (N→C)', 'Sekundär: α-Helix, β-Faltblatt', 'Tertiär: 3D-Faltung', 'Quartär: Untereinheiten-Anordnung'], formula: null },
+      { icon: '⚡', color: 'var(--yellow-bg)', title: 'Wechselwirkungen', points: ['Ionisch (stark)', 'Wasserstoffbrücken (mittel)', 'Hydrophob + vdW (schwach)'], formula: null },
+      { icon: '🔧', color: 'var(--teal-bg)', title: 'Beispiele', points: ['Kollagen: starr, Bindegewebe', 'Lactoferrin: flexibel, induzierte Konformationsänderung durch Eisenbindung'], formula: null },
+    ]
+  },
+  vl02: {
+    topics: [
+      { icon: '🔗', color: 'var(--accent-bg)', title: 'Ligandenbindung', points: ['Spezifisch, nicht-kovalent', 'Affinität = Bindungsstärke', 'KD = [P][L]/[PL]; 50% Sättigung bei [L]=KD', 'Je kleiner KD → größere Affinität'], formula: 'KD = [Protein][Ligand] / [Komplex]' },
+      { icon: '🤝', color: 'var(--teal-bg)', title: 'Allosterie & Signale', points: ['Positiv: erleichtert 2. Ligand-Bindung', 'Negativ: erschwert 2. Ligand-Bindung', 'Calmodulin: Ca²⁺→Konformationsänderung→Muskelkontraktion', 'G-Proteine: GDP (inaktiv) ↔ GTP (aktiv)'], formula: null },
+      { icon: '⚙️', color: 'var(--green-bg)', title: 'Motorproteine & Zytoskelett', points: ['Myosin II auf Aktinfilament (ATP-gesteuert)', '3 Konformationsänderungen: ATP-Bindung, Hydrolyse, ADP+Pi-Freigabe', 'Aktin: Polymerisation durch ATP-Bindung'], formula: null },
+      { icon: '🔄', color: 'var(--orange-bg)', title: 'Phosphorylierung & Glykogen', points: ['Kinasen: Phosphorylierung (Ser/Thr)', 'Phosphatasen: Dephosphorylierung', 'Glykogen-Phosphorylase: AMP aktiviert, ATP+G6P hemmt', 'Adrenalin → Phosphorylierung → aktive Form'], formula: null },
+    ]
+  },
+  vl03: {
+    topics: [
+      { icon: '🔤', color: 'var(--accent-bg)', title: '20 kanonische Aminosäuren', points: ['Unpolar aliphatisch: Gly(G), Ala(A), Val(V), Leu(L), Ile(I), Met(M), Pro(P)', 'Unpolar aromatisch: Phe(F), Tyr(Y), Trp(W)', 'Polar: Ser(S), Thr(T), Cys(C), Asn(N), Gln(Q)', 'Negativ: Asp(D), Glu(E) | Positiv: Lys(K), Arg(R), His(H)'], formula: null },
+      { icon: '🧲', color: 'var(--teal-bg)', title: 'Peptidbindung', points: ['Kondensation (−H₂O)', 'Planar (Mesomerie, partieller Doppelbindungscharakter)', 'Trans bevorzugt; Cis nur bei Pro häufiger', 'Torsionswinkel: φ, ψ (Ramachandran-Plot)'], formula: null },
+      { icon: '🌀', color: 'var(--green-bg)', title: 'α-Helix', points: ['Rechtsgängig, 3.6 AS/Umdrehung', '0.15 nm/Rest, 0.54 nm Ganghöhe', 'H-Brücken: CO(i)–NH(i+4)', 'Amphiphile Helices: hydrophile & hydrophobe Seite', 'Beispiel: Ferritin'], formula: null },
+      { icon: '📄', color: 'var(--purple-bg)', title: 'β-Strukturen', points: ['β-Strang: 0.35 nm/Rest, fast ausgestreckt', 'Antiparallel: H-Brücken je AS zu 1 Nachbar-AS', 'Parallel: H-Brücken je AS zu 2 Nachbar-AS', 'β-Kehre: CO(i)–NH(i+3)', 'Loops: keine Periodizität'], formula: null },
+    ]
+  },
+  vl04: {
+    topics: [
+      { icon: '🏗️', color: 'var(--accent-bg)', title: 'Supersekundärstrukturen', points: ['βαβ-Motiv', 'β-Haarnadelschleife', 'αα-Motiv', 'Mäander-Motiv', 'Helix-Kehre-Helix (DNA-Bindung)'], formula: null },
+      { icon: '💧', color: 'var(--teal-bg)', title: 'Tertiärstruktur & Hydrophobie', points: ['Hydrophober Effekt: Aggregation → Entropiegewinn', 'Wasserlösliche Proteine: hydrophil außen, hydrophob innen', 'Membranproteine: hydrophob außen (Porin)', 'Domänen: 30–400 AS, kompakte Einheiten'], formula: null },
+      { icon: '🔩', color: 'var(--green-bg)', title: 'Domänen', points: ['Kompakte globuläre Einheiten', 'Verbunden durch flexible Segmente', 'Beispiel: CD4 (4 Domänen)'], formula: null },
+      { icon: '🤝', color: 'var(--purple-bg)', title: 'Quartärstruktur', points: ['Anordnung mehrerer Untereinheiten', 'Nicht-kovalente WW (ionisch, H-Brücken, hydrophob)', 'Hämoglobin = α₂β₂-Tetramer'], formula: null },
+    ]
+  },
+  vl05: {
+    topics: [
+      { icon: '🧬', color: 'var(--accent-bg)', title: 'Mutationen & Evolution', points: ['Punktmutation: AS-Austausch, Stopp-Codon, stille Mutation', 'Deletion/Insertion: Leserasterverschiebung (±3 Nt = 1 AS)', 'Neutraler Drift: Primärstruktur ändert sich, 3D bleibt', 'Positiver Selektionsdruck: verbesserte Funktion'], formula: null },
+      { icon: '🌐', color: 'var(--teal-bg)', title: 'Homologie & Alignment', points: ['Orthologe: verschiedene Spezies, gleiche Funktion', 'Paraloge: gleiche Spezies, verschiedene Funktion', 'Sequenzidentität vs. Sequenzähnlichkeit', 'Cytochrom c: 38% identisch zwischen Spezies'], formula: null },
+      { icon: '🌿', color: 'var(--green-bg)', title: 'Globinfamilie & Konvergenz', points: ['Genduplikation: Leghämoglobin ~800 Mio. J., Myoglobin, Hb α+β', '3D-Struktur konservierter als Sequenz', 'Konvergente Evolution: Chymotrypsin & Subtilisin (analoge Katalytische Triade)'], formula: null },
+      { icon: '🗄️', color: 'var(--purple-bg)', title: 'Proteindatenbanken', points: ['UniProt/SwissProt: Sequenzen', 'PDB: 3D-Strukturen', 'BLAST: Sequenzähnlichkeit', 'CATH: Klasse→Architektur→Topologie→Superfamilie', 'Proteom: ~20.000 Gene; Alternatives Spleißen → Vielfalt'], formula: null },
+    ]
+  },
+  vl06: {
+    topics: [
+      { icon: '⚗️', color: 'var(--accent-bg)', title: 'Enzyme: Eigenschaften', points: ['Biochemische Katalysatoren; Ribozyme = RNA-basiert', 'Hohe Substrat- & Reaktionsspezifität', '100% stereoselektiv', 'Aktives Zentrum: Substratbindestelle + katalytische Reste'], formula: null },
+      { icon: '💊', color: 'var(--teal-bg)', title: 'Cofaktoren & Coenzyme', points: ['Apoenzym (Protein) + Cofaktor = Holoenzym', 'Cosubstrate: vorübergehend (z.B. NAD⁺, ATP)', 'Prosthetische Gruppen: dauerhaft kovalent (z.B. Häm)', 'Vitamine als Vorstufen: Niacin→NAD⁺, B6→PLP, Biotin→Biocytin'], formula: null },
+      { icon: '🔢', color: 'var(--green-bg)', title: '6 Enzymklassen', points: ['1. Oxidoreduktasen (Redox)', '2. Transferasen (Gruppen übertragen)', '3. Hydrolasen (hydrolytische Spaltung)', '4. Lyasen (Eliminierung, z.B. Decarboxylierung)', '5. Isomerasen (Umlagerung)', '6. Ligasen/Synthetasen (ATP-abhängige Bindung)'], formula: null },
+      { icon: '⚡', color: 'var(--orange-bg)', title: 'Thermodynamik', points: ['G = H − TS; ΔG < 0: exergon (spontan)', 'ΔG > 0: endergon; ΔG = 0: Gleichgewicht', 'Enzyme senken Aktivierungsenergie ΔG‡', 'Arrhenius: k = e^(−ΔG‡/RT)'], formula: 'ΔG = ΔH − TΔS' },
+    ]
+  },
+  vl07: {
+    topics: [
+      { icon: '🔬', color: 'var(--accent-bg)', title: 'Katalytische Prinzipien', points: ['Säure-Base-Katalyse: Protonenakzeptor/-donor', 'Metallionenkatalyse: stabilisieren ÜZ, Redox', 'Kovalente Katalyse: Enzym als vorübergehender Partner', 'Nachbarschaftseffekt: optimale Positionierung', 'Bevorzugte ÜZ-Bindung: ΔG‡ ↓'], formula: null },
+      { icon: '🧪', color: 'var(--teal-bg)', title: 'Laktatdehydrogenase (LDH)', points: ['Oxidoreduktase: L-Laktat ⇌ Pyruvat', 'NAD⁺ ↔ NADH; Reaktion reversibel', 'His195: Basenkatalyse (Protonenakzeptor)', 'Arg109 stabilisiert Übergangszustand', 'Hydrophober Wasserausschluss im aktiven Zentrum'], formula: 'L-Laktat + NAD⁺ → Pyruvat + NADH + H⁺' },
+      { icon: '✂️', color: 'var(--green-bg)', title: 'Serinproteasen (Trypsin)', points: ['Katalytische Triade: Asp102 – His57 – Ser195', 'Trypsin: spaltet nach Lys/Arg (Spezifitätstasche mit Asp)', 'Acyl-Enzym-Intermediat über Ser195', 'Chymotrypsin: spaltet nach Phe/Trp/Tyr', 'Elastase: spaltet nach Ala/Gly (kleine Tasche)'], formula: null },
+      { icon: '⚔️', color: 'var(--purple-bg)', title: 'Proteasen & Ribozyme', points: ['Endopeptidasen: Mitte der Kette', 'Exopeptidasen: Amino- oder Carboxypeptidase', 'HIV-Protease: Aspartat-Protease (2 Asp-Reste)', 'Ribozyme: RNA mit katalytischer Aktivität (RNase P, Ribosom, Spleißosom)'], formula: null },
+    ]
+  },
+  vl08: {
+    topics: [
+      { icon: '📐', color: 'var(--accent-bg)', title: 'Michaelis-Menten-Kinetik', points: ['V₀ = Vmax·[S] / ([S] + KM)', 'KM = (k₂ + k₋₁)/k₁', 'Bei [S] = KM: V₀ = ½·Vmax', 'KM niedrig → hohe Affinität', 'kcat = Wechselzahl; kcat/KM = katalytische Effizienz'], formula: 'V₀ = Vmax · [S] / (KM + [S])' },
+      { icon: '📏', color: 'var(--teal-bg)', title: 'Lineweaver-Burk', points: ['Doppelreziproke Auftragung', '1/V₀ = (KM/Vmax)·(1/[S]) + 1/Vmax', 'x-Achsenabschnitt: −1/KM', 'y-Achsenabschnitt: 1/Vmax'], formula: '1/V = (KM/Vmax)·(1/[S]) + 1/Vmax' },
+      { icon: '📡', color: 'var(--green-bg)', title: 'Optische Messmethoden', points: ['Lambert-Beer: E = ε·c·d', 'NADH/NADPH: Absorptionsmax. bei 340 nm (NAD⁺ nicht!)', 'Optischer Test: Extinktionsänderung über Zeit', 'Gekoppelter Test: Indikatorenzym (z.B. LDH) koppeln'], formula: 'E_λ = ε_λ · c · d' },
+      { icon: '🏥', color: 'var(--purple-bg)', title: 'Medizinische Diagnostik', points: ['Pepsin pH-Optimum: pH 2 (Aspartat-Protease)', 'Trypsin pH-Optimum: pH 8 (Serinprotease)', 'Temperaturoptimum Mensch: 37°C', 'LDH-Isoformen: H4 (Herz), M4 (Muskel); Erhöhung bei Nekrose', 'CK-MB: Herzmarker (Myokardinfarkt)'], formula: null },
+    ]
+  },
+  vl09: {
+    topics: [
+      { icon: '🚫', color: 'var(--accent-bg)', title: 'Reversible Inhibition', points: ['Kompetitiv: substratanalog, Vmax↔, KM↑, KI = [E][I]/[EI]', 'Nichtkompetitiv: bindet E+ES, Vmax↓, KM↔', 'Unkompetitiv: bindet ES-Komplex, Vmax↓, KM↓', 'Parallele Geraden im LB-Plot bei unkompetitiv'], formula: null },
+      { icon: '💉', color: 'var(--teal-bg)', title: 'Pharmakolog. Inhibitoren', points: ['Statine: HMG-CoA-Reduktase (Cholesterinsynthese)', 'ACE-Hemmer: Captopril, Enalapril, Ramipril', 'Sulfonamide: Dihydropteroatsynthase (Folsäure)', 'ASS: Cyclooxygenase (COX) irreversibel (Ser529)', 'DFP/Sarin: Acetylcholinesterase irreversibel'], formula: null },
+      { icon: '🔄', color: 'var(--green-bg)', title: 'Allosterische Regulation', points: ['Homotrop: Substrat bindet → ändert andere katalyt. UE (Kooperativität)', 'Sigmoidale Kinetik (nicht Michaelis-Menten)', 'Heterotrop: Effektor bindet regulat. UE → ändert katalyt. UE', 'ATCase: CTP hemmt (neg.), ATP aktiviert (pos.)'], formula: null },
+      { icon: '⚙️', color: 'var(--purple-bg)', title: 'Phosphorylierung & Zymogene', points: ['Reversible Phosphorylierung an Ser/Thr/Tyr', 'Kinasen (ATP→P) ↔ Phosphatasen', 'Glykogen-Phosphorylase a (phosphoryliert) > b', 'Zymogene: inaktive Proenzyme (Trypsinogen→Trypsin)', 'Enteropeptidase → Trypsin → Autoaktivierung + Kaskade'], formula: null },
+    ]
+  }
+};
+
+// ---- FLASHCARDS DATA ----
+const ALL_CARDS = [
+  // VL01
+  { id:1, vl:'vl01', cat:'Grundlagen', q:'Welchen Massenanteil machen Proteine in tierischen Zellen aus?', a:'10–15% der Zellmasse (nach Wasser mit 80–85% die zweitgrößte Fraktion).' },
+  { id:2, vl:'vl01', cat:'Grundlagen', q:'Aus welchen Elementen bestehen Proteine?', a:'C, N, O, H und S (Schwefel, z.B. in Cystin-Disulfidbrücken und Methionin).' },
+  { id:3, vl:'vl01', cat:'Struktur', q:'Nenne die 4 Strukturhierarchien eines Proteins.', a:'Primär (Sequenz N→C) → Sekundär (α-Helix, β-Faltblatt) → Tertiär (3D-Faltung) → Quartär (Untereinheiten).' },
+  { id:4, vl:'vl01', cat:'Wechselwirkungen', q:'Ordne diese Wechselwirkungen nach Stärke: vdW, ionisch, H-Brücken.', a:'Ionisch (stark) > Wasserstoffbrücken (mittel) > Hydrophob/vdW (schwach).' },
+  { id:5, vl:'vl01', cat:'Beispiele', q:'Wie unterscheiden sich Kollagen und Lactoferrin bezüglich ihrer Flexibilität?', a:'Kollagen: starr (Bindegewebe). Lactoferrin: flexibel – induzierte Konformationsänderung durch Eisenbindung.' },
+  // VL02
+  { id:6, vl:'vl02', cat:'Bindung', q:'Was ist der KD-Wert und was sagt er aus?', a:'KD = [Protein][Ligand]/[Komplex]. Maß für Bindungsaffinität: je kleiner KD, desto stärker die Bindung. Bei [L]=KD sind 50% der Bindungsstellen besetzt.' },
+  { id:7, vl:'vl02', cat:'Bindung', q:'Welche Eigenschaften hat Ligandenbindung an Proteine?', a:'Spezifisch, nicht-kovalent; bestimmt durch Affinität und Sättigung.' },
+  { id:8, vl:'vl02', cat:'Signaling', q:'Welche Rolle spielt Calmodulin in der Signaltransduktion?', a:'Ca²⁺ bindet Calmodulin → Konformationsänderung → Bindung an Zielproteine → z.B. Muskelkontraktion.' },
+  { id:9, vl:'vl02', cat:'Signaling', q:'Wie funktionieren G-Proteine (GTP-gesteuert)?', a:'Inaktiv mit GDP, aktiv mit GTP. GEFs tauschen GDP gegen GTP aus (Aktivierung). GAPs stimulieren GTPase → Inaktivierung.' },
+  { id:10, vl:'vl02', cat:'Motorproteine', q:'Beschreibe die 3 Konformationsänderungen von Myosin II beim Kraftschlag.', a:'(1) ATP-Bindung: löst Myosin vom Aktin. (2) ATP-Hydrolyse: Myosin spannt sich (Rückwärtsbewegung). (3) ADP+Pi-Freigabe: Kraftschlag, Aktin vorwärts gezogen.' },
+  { id:11, vl:'vl02', cat:'Regulation', q:'Wie wird Glykogen-Phosphorylase reguliert?', a:'AMP aktiviert (Energiemangel); ATP + G6P hemmt (ausreichend Energie). Phosphorylierung durch Adrenalin → Phosphorylase a (aktiv); Insulin → Phosphatase → Phosphorylase b (inaktiv).' },
+  { id:12, vl:'vl02', cat:'Regulation', q:'Was bedeutet positive und negative Allosterie?', a:'Positiv: Bindung eines Liganden erleichtert Bindung weiterer Liganden. Negativ: Bindung eines Liganden erschwert Bindung weiterer Liganden.' },
+  // VL03
+  { id:13, vl:'vl03', cat:'Aminosäuren', q:'Welche AS haben eine unpolare aromatische Seitenkette?', a:'Phenylalanin (Phe/F), Tyrosin (Tyr/Y), Tryptophan (Trp/W).' },
+  { id:14, vl:'vl03', cat:'Aminosäuren', q:'Welche Aminosäure kann kovalente Disulfidbrücken bilden?', a:'Cystein (Cys/C). Zwei Cystein-Reste oxidieren zur Cystin-Disulfidbrücke (–S–S–).' },
+  { id:15, vl:'vl03', cat:'Aminosäuren', q:'Welche AS sind bei physiologischem pH positiv geladen?', a:'Lysin (Lys/K, pKa~10.5), Arginin (Arg/R, pKa~12.5), Histidin (His/H, pKa≈6) – His je nach pH.' },
+  { id:16, vl:'vl03', cat:'Peptidbindung', q:'Warum ist die Peptidbindung planar?', a:'Mesomerie (partieller Doppelbindungscharakter) zwischen C=O und N–H verhindert freie Rotation. Trans-Konformation bevorzugt; Cis nur bei Pro häufiger.' },
+  { id:17, vl:'vl03', cat:'α-Helix', q:'Beschreibe die α-Helix: Umdrehungen, Abstand, H-Brücken.', a:'Rechtsgängig; 3.6 AS pro Umdrehung; 0.15 nm pro Rest; 0.54 nm Ganghöhe. H-Brücken zwischen CO(i) und NH(i+4). Alle C=O und N–H beteiligt.' },
+  { id:18, vl:'vl03', cat:'β-Strukturen', q:'Was unterscheidet antiparallele von parallelen β-Faltblättern?', a:'Antiparallel: Stränge verlaufen entgegengesetzt; H-Brücken je AS zu 1 AS auf Nachbarstrang. Parallel: gleiche Richtung; H-Brücken je AS zu 2 AS. Antiparallele H-Brücken sind günstiger (gerader).' },
+  { id:19, vl:'vl03', cat:'β-Strukturen', q:'Welche Sekundärstruktur ermöglicht rasche Richtungsänderungen in der Polypeptidkette?', a:'β-Kehre (β-turn): CO(i)–NH(i+3) H-Brücke; verbindet oft antiparallele β-Stränge.' },
+  { id:20, vl:'vl03', cat:'Grundlagen', q:'Was ist der Unterschied zwischen einem Peptid und einem Protein?', a:'Peptid: ≤100 Aminosäuren. Protein/Polypeptid: >100 Aminosäuren.' },
+  // VL04
+  { id:21, vl:'vl04', cat:'Motive', q:'Nenne 3 Supersekundärstrukturmotive (Proteinmotive).', a:'βαβ-Motiv, β-Haarnadelschleife, αα-Motiv, Mäander-Motiv, Helix-Kehre-Helix (HTH, DNA-Bindung).' },
+  { id:22, vl:'vl04', cat:'Tertiär', q:'Was ist der hydrophobe Effekt und welche Rolle spielt er bei Proteinen?', a:'Wasserunlösliche Gruppen aggregieren in wässriger Umgebung → Entropiegewinn des Wassers. Treibt Faltung: hydrophob ins Innere, hydrophil nach außen.' },
+  { id:23, vl:'vl04', cat:'Tertiär', q:'Wie unterscheiden sich wasserlösliche und Membranproteine in ihrer Tertiärstruktur?', a:'Wasserlöslich: hydrophiles Äußeres, hydrophobes Inneres. Membranproteine: hydrophobe Bereiche außen (in Membran), z.B. Porin. Wasserkanäle: hydrophil ausgekleidete Pore.' },
+  { id:24, vl:'vl04', cat:'Quartär', q:'Was ist das Hämoglobin und wie ist es aufgebaut?', a:'Hämoglobin: α₂β₂-Tetramer (Quartärstruktur). Verbunden durch nicht-kovalente Wechselwirkungen.' },
+  { id:25, vl:'vl04', cat:'Domänen', q:'Was sind Proteindomänen?', a:'Kompakte, globuläre Struktureinheiten (30–400 AS), verbunden durch flexible Segmente. Können unabhängig falten. Beispiel: CD4 mit 4 Domänen.' },
+  // VL05
+  { id:26, vl:'vl05', cat:'Mutationen', q:'Was ist der Unterschied zwischen einer Punktmutation und einer Insertion?', a:'Punktmutation: 1 Nukleotid substituiert → AS-Austausch, Stopp-Codon oder stille Mutation. Insertion: Nukleotid eingefügt → Leserasterverschiebung (außer ±3 Nt = ±1 AS).' },
+  { id:27, vl:'vl05', cat:'Evolution', q:'Was sind Orthologe und Paraloge?', a:'Orthologe: homologe Proteine in verschiedenen Spezies (gleiche Funktion). Paraloge: homologe Proteine in gleicher Spezies (unterschiedliche Funktion, durch Genduplikation entstanden).' },
+  { id:28, vl:'vl05', cat:'Evolution', q:'Was zeigt das Beispiel Cytochrom c über die Proteinevolution?', a:'Cytochrom c (mitochondriale Atmungskette): 38% aller Positionen zwischen Spezies identisch. Funktionell essenzielle Reste unverändert → molekulare Stammbäume möglich.' },
+  { id:29, vl:'vl05', cat:'Evolution', q:'Was versteht man unter konvergenter Evolution? Nenne ein Beispiel.', a:'Unabhängige Entstehung ähnlicher Eigenschaften in nicht-verwandten Linien. Beispiel: Serinproteasen Chymotrypsin & Subtilisin – keine Sequenzhomologie, fast identische katalytische Triade.' },
+  { id:30, vl:'vl05', cat:'Datenbanken', q:'Wozu dient BLAST und wo ist es abrufbar?', a:'BLAST (Basic Local Alignment Search Tool): Findet Sequenzähnlichkeiten in Datenbanken. https://blast.ncbi.nlm.nih.gov/. Ergebnis: ähnliche Proteine → mögliche Funktion vorhersagen.' },
+  { id:31, vl:'vl05', cat:'Datenbanken', q:'Wie klassifiziert CATH Proteine?', a:'Hierarchisch: Klasse (α, β, α+β) → Architektur (Fass, Sandwich, Kasten) → Topologie → Homologe Superfamilie. https://www.cathdb.info/' },
+  { id:32, vl:'vl05', cat:'Proteom', q:'Was ist das Proteom und warum gibt es mehr Proteine als Gene?', a:'Proteom = alle Proteine einer Zelle. ~20.000 proteinkodierende Gene, aber mehr Proteine durch: alternatives Spleißen, co-/posttranslationale Modifikationen.' },
+  // VL06
+  { id:33, vl:'vl06', cat:'Enzyme', q:'Was ist der Unterschied zwischen Apoenzym, Holoenzym und Metalloenzym?', a:'Apoenzym: Enzymprotein ohne Cofaktor. Holoenzym: Apoenzym + Cofaktor = aktives Enzym. Metalloenzym: Metallion als Cofaktor (z.B. Zn in Carboxypeptidase A).' },
+  { id:34, vl:'vl06', cat:'Cofaktoren', q:'Was ist der Unterschied zwischen Cosubstraten und Prosthetischen Gruppen?', a:'Cosubstrate: vorübergehend gebunden, werden bei Reaktion umgesetzt und regeneriert (z.B. NAD⁺, ATP). Prosthetische Gruppen: dauerhaft kovalent gebunden (z.B. Häm bei Katalase).' },
+  { id:35, vl:'vl06', cat:'Cofaktoren', q:'Welches Vitamin ist Vorstufe von NAD⁺ und was überträgt NAD⁺?', a:'NAD⁺/NADP⁺: Vorstufe Niacin (Vitamin B3). Überträgt Hydridionen (H⁻) bei Redoxreaktionen.' },
+  { id:36, vl:'vl06', cat:'Enzymklassen', q:'Zu welcher Enzymklasse gehört die DNA-Ligase?', a:'Klasse 6: Ligasen (Synthetasen) – bilden neue kovalente Bindungen unter ATP-Verbrauch.' },
+  { id:37, vl:'vl06', cat:'Thermodynamik', q:'Was ist der Unterschied zwischen ΔG und ΔG‡ (Aktivierungsenergie)?', a:'ΔG (Gibbs-Energie): bestimmt ob Reaktion spontan ist (ΔG<0 exergon). ΔG‡: Aktivierungsenergie, bestimmt Reaktionsgeschwindigkeit. Enzyme senken ΔG‡, nicht ΔG!' },
+  { id:38, vl:'vl06', cat:'Thermodynamik', q:'Was beschreibt die Arrhenius-Gleichung im Enzymkontext?', a:'k = e^(−ΔG‡/RT). Enzyme senken ΔG‡ exponentiell → massive Reaktionsbeschleunigung (bis 10¹⁷-fach).' },
+  // VL07
+  { id:39, vl:'vl07', cat:'Katalyse', q:'Nenne 4 katalytische Prinzipien von Enzymen.', a:'(1) Säure-Base-Katalyse, (2) Metallionenkatalyse, (3) Kovalente Katalyse, (4) Nachbarschafts-/Orientierungseffekt, (5) Bevorzugte Bindung des Übergangszustandes.' },
+  { id:40, vl:'vl07', cat:'LDH', q:'Welche Reaktion katalysiert die Laktatdehydrogenase (LDH)?', a:'L-Laktat + NAD⁺ ⇌ Pyruvat + NADH + H⁺ (reversibel). Oxidoreduktase. His195: Basenkatalyse; Arg109: ÜZ-Stabilisierung.' },
+  { id:41, vl:'vl07', cat:'Serinproteasen', q:'Nenne die katalytische Triade von Trypsin und ihre Funktion.', a:'Asp102 – His57 – Ser195. Asp positioniert His; His aktiviert Ser (Protonenakzeptor → stärkeres Nukleophil) → Ser greift nukleophil am Carbonyl an.' },
+  { id:42, vl:'vl07', cat:'Serinproteasen', q:'Wie unterscheiden sich Trypsin, Chymotrypsin und Elastase in ihrer Substratspezifität?', a:'Trypsin: nach Lys/Arg (Spezifitätstasche mit Asp). Chymotrypsin: nach Phe/Trp/Tyr (große hydrophobe Tasche). Elastase: nach Ala/Gly (kleine Tasche durch Val/Thr).' },
+  { id:43, vl:'vl07', cat:'Proteasen', q:'Was ist der Unterschied zwischen Endopeptidasen und Exopeptidasen?', a:'Endopeptidasen: spalten in der Mitte der Kette (z.B. Trypsin, Chymotrypsin). Exopeptidasen: Aminopeptidasen (vom N-Terminus) oder Carboxypeptidasen (vom C-Terminus).' },
+  { id:44, vl:'vl07', cat:'Ribozyme', q:'Was sind Ribozyme? Nenne 3 Beispiele im Menschen.', a:'RNA-Moleküle mit katalytischer Aktivität. Beispiele: RNase P (tRNA-Prozessierung), Ribosomen (Peptidyltransferase im aktiven Zentrum), Spleißosomen (prä-mRNA-Prozessierung).' },
+  // VL08
+  { id:45, vl:'vl08', cat:'Kinetik', q:'Was bedeutet KM in der Michaelis-Menten-Kinetik?', a:'KM = (k₂ + k₋₁)/k₁. Substratkonzentration bei halbmaximaler Geschwindigkeit (V₀ = ½·Vmax). Niedriger KM = höhere Affinität des Enzyms für das Substrat.' },
+  { id:46, vl:'vl08', cat:'Kinetik', q:'Was ist kcat (Wechselzahl) und was misst kcat/KM?', a:'kcat = maximale Anzahl Substratmoleküle/Enzym/Zeit (bei [S]>>KM). kcat/KM = katalytische Effizienz (Maß für Enzymgüte; theoretisches Maximum ~10⁸–10⁹ M⁻¹s⁻¹ durch Diffusionslimit).' },
+  { id:47, vl:'vl08', cat:'Kinetik', q:'Erkläre das Lineweaver-Burk-Diagramm.', a:'Doppelreziproke Auftragung: 1/V₀ gegen 1/[S]. Gerade mit Steigung KM/Vmax. y-Achsenabschnitt: 1/Vmax. x-Achsenabschnitt: −1/KM.' },
+  { id:48, vl:'vl08', cat:'Messung', q:'Warum ist NADH für den optischen Test geeignet?', a:'NADH/NADPH absorbiert bei 340 nm (Absorptionsmaximum). NAD⁺/NADP⁺ nicht. → Extinktionsänderung bei 340 nm über Zeit = direktes Maß für Reaktionsgeschwindigkeit.' },
+  { id:49, vl:'vl08', cat:'Messung', q:'Was ist das Lambert-Beer\'sche Gesetz?', a:'E_λ = ε_λ · c · d. E: Extinktion; ε: Extinktionskoeffizient; c: Konzentration; d: Schichtdicke (Küvette). Erlaubt Konzentrationsbestimmung aus Extinktion.' },
+  { id:50, vl:'vl08', cat:'Diagnostik', q:'Was ist der Unterschied zwischen LDH-H4 und LDH-M4?', a:'LDH ist ein Tetramer aus H- und M-Untereinheiten (5 Isoformen). H4 (Herz): wandelt Laktat → Pyruvat (aerob). M4 (Muskel): wandelt Pyruvat → Laktat (anaerob). Bei Nekrose: LDH-Freisetzung ins Serum.' },
+  { id:51, vl:'vl08', cat:'Diagnostik', q:'Welche Marker erhöhen sich nach einem akuten Myokardinfarkt (AMI)?', a:'Myoglobin (früh), CK-MB (Myokardtyp, Kreatinkinase), kardiales Troponin T (cTnT, lang anhaltend), LDH-1 (H4, spät). Anstieg über Stunden nach AMI-Beginn.' },
+  // VL09
+  { id:52, vl:'vl09', cat:'Inhibition', q:'Erkläre den Unterschied zwischen kompetitiver und nichtkompetitiver Inhibition.', a:'Kompetitiv: Inhibitor substratanalog, verdrängt Substrat → KM↑, Vmax unverändert, überwindbar durch hohe [S]. Nichtkompetitiv: bindet an E und ES → Vmax↓, KM bleibt (unabhängig von [S]).' },
+  { id:53, vl:'vl09', cat:'Inhibition', q:'Was ist die unkompetitive Inhibition?', a:'Inhibitor bindet nur an ES-Komplex, nicht an freies E → Vmax↓, KM↓ (scheinbar erhöhte Affinität). Parallele Geraden im Lineweaver-Burk-Diagramm.' },
+  { id:54, vl:'vl09', cat:'Pharmakologie', q:'Wie wirken Statine und welches Enzym hemmen sie?', a:'Statine hemmen kompetitiv die HMG-CoA-Reduktase (Schlüsselenzym der Cholesterinbiosynthese) → weniger Cholesterin → Herz-Kreislauf-Schutz.' },
+  { id:55, vl:'vl09', cat:'Pharmakologie', q:'Wie wirkt Aspirin (ASS) als irreversibler Inhibitor?', a:'ASS acetyliert kovalent Ser529 der Cyclooxygenase (COX) → irreversible Inhibition. COX produziert Prostaglandine aus Arachidonsäure → Entzündungshemmung.' },
+  { id:56, vl:'vl09', cat:'Pharmakologie', q:'Warum sind Kampfgase wie Sarin so gefährlich?', a:'Sarin/DFP: irreversible Inhibition der Acetylcholinesterase (Serinprotease-ähnlich). Acetylcholin nicht abgebaut → cholinerge Nervenpulsblockade → Atemlähmung → Tod.' },
+  { id:57, vl:'vl09', cat:'Allosterie', q:'Was ist der Unterschied zwischen homotroper und heterotroper allosterischer Regulation?', a:'Homotrop: Substrat bindet an katalyt. UE → verändert Aktivität anderer katalyt. UE (Kooperativität, sigmoidale Kinetik). Heterotrop: Effektor bindet an regulatorische UE → verändert katalyt. UE.' },
+  { id:58, vl:'vl09', cat:'Allosterie', q:'Beschreibe die Regulation der Aspartat-Transcarbamoylase (ATCase).', a:'ATCase: 6 katalytische + 6 regulatorische UE. CTP (Pyrimidin-Endprodukt): neg. Feedback → KM↑. ATP (Purin): pos. Regulator → KM↓. Positive Homotropie durch Aspartat/Carbamoylphosphat.' },
+  { id:59, vl:'vl09', cat:'Phosphorylierung', q:'Wie reguliert Phosphorylierung die Glykogen-Phosphorylase?', a:'Adrenalin/Glucagon → Phosphorylase-Kinase → Phosphorylierung → Glykogen-Phosphorylase a (aktiv). Insulin → Phosphoprotein-Phosphatase 1 → Dephosphorylierung → Form b (inaktiv).' },
+  { id:60, vl:'vl09', cat:'Zymogene', q:'Was sind Zymogene und wie wird Trypsinogen aktiviert?', a:'Zymogene = inaktive Proenzyme (Proform). Trypsinogen → Dünndarm → Enteropeptidase spaltet Aktivierungspeptid → Trypsin. Trypsin aktiviert dann sich selbst + Chymotrypsin, Elastase, Carboxypeptidase A, Pankreaslipase.' },
+];
+
+// ---- QUIZ DATA ----
+const ALL_QUIZ = [
+  { id:1, vl:'vl01', q:'Was ist die Primärstruktur eines Proteins?', opts:['Räumliche 3D-Faltung','Die Aminosäuresequenz von N- zu C-Terminus','Anordnung der Untereinheiten','Die α-Helix-Menge'], correct:1, exp:'Die Primärstruktur ist die lineare Abfolge der Aminosäuren vom N- zum C-Terminus, kodiert durch die DNA-Sequenz.' },
+  { id:2, vl:'vl01', q:'Welche Wechselwirkung ist in Proteinen am stärksten?', opts:['Van-der-Waals-Kräfte','Hydrophobe Interaktionen','Ionische Wechselwirkungen','Wasserstoffbrücken'], correct:2, exp:'Ionische (elektrostatische) Wechselwirkungen sind die stärksten nicht-kovalenten Bindungen in Proteinen.' },
+  { id:3, vl:'vl02', q:'Was beschreibt der KD-Wert?', opts:['Die Enzymgeschwindigkeit bei maximaler Substratkonzentration','Die Substratkonzentration bei halbmaximaler Enzymgeschwindigkeit','Den Dissoziationskonstanten eines Protein-Ligand-Komplexes','Den pH-Wert bei optimaler Enzymaktivität'], correct:2, exp:'KD = [Protein][Ligand]/[Komplex]. Bei [L]=KD sind 50% der Bindestellen besetzt. Kleiner KD = höhere Affinität.' },
+  { id:4, vl:'vl02', q:'Was ist der aktivierte Zustand von G-Proteinen?', opts:['GDP-gebunden','GMP-gebunden','GTP-gebunden','ADP-gebunden'], correct:2, exp:'G-Proteine sind aktiv, wenn GTP gebunden ist. GEFs katalysieren den GDP→GTP-Austausch (Aktivierung); GAPs stimulieren GTPase-Aktivität (Inaktivierung).' },
+  { id:5, vl:'vl03', q:'Wie viele Aminosäuren pro Umdrehung hat eine α-Helix?', opts:['2.0','3.6','4.2','5.0'], correct:1, exp:'Die rechtsgängige α-Helix hat 3.6 Aminosäuren pro Umdrehung, mit einer Ganghöhe von 0.54 nm und 0.15 nm pro Aminosäure.' },
+  { id:6, vl:'vl03', q:'Welche H-Brückenmuster hat die α-Helix?', opts:['CO(i)–NH(i+2)','CO(i)–NH(i+3)','CO(i)–NH(i+4)','CO(i)–NH(i+5)'], correct:2, exp:'In der α-Helix bildet jede C=O-Gruppe eine H-Brücke mit der N–H-Gruppe der 4. nachfolgenden Aminosäure.' },
+  { id:7, vl:'vl03', q:'Welche AS bildet bei oxidation kovalente Disulfidbrücken?', opts:['Serin','Methionin','Cystein','Threonin'], correct:2, exp:'Cystein (Cys/C) enthält eine Thiolgruppe (–SH). Zwei Cysteine oxidieren zur Disulfidbrücke (–S–S–), dem einzigen kovalenten Cross-Link in der Tertiärstruktur.' },
+  { id:8, vl:'vl04', q:'Welche Proteinstruktur beschreibt die Anordnung mehrerer Polypeptidketten?', opts:['Primärstruktur','Sekundärstruktur','Tertiärstruktur','Quartärstruktur'], correct:3, exp:'Die Quartärstruktur beschreibt die räumliche Anordnung mehrerer Polypeptiduntereinheiten. Beispiel: Hämoglobin als α₂β₂-Tetramer.' },
+  { id:9, vl:'vl04', q:'Welche Kräfte treiben den hydrophoben Effekt an?', opts:['Enthalpiegewinn durch H-Brücken','Entropiegewinn des Wassers','Elektronegativitätsdifferenzen','Kovalente Bindungen'], correct:1, exp:'Der hydrophobe Effekt ist entropisch getrieben: Wasserunlösliche Gruppen aggregieren → das Wasser gewinnt Entropie, da keine strukturierte Hydrathülle mehr gebildet werden muss.' },
+  { id:10, vl:'vl05', q:'Was sind Orthologe?', opts:['Paraloge Gene in der gleichen Spezies','Proteine in verschiedenen Spezies mit gleicher Funktion','Proteine ohne Sequenzhomologie aber gleicher Funktion','Zufällige Sequenzähnlichkeiten'], correct:1, exp:'Orthologe: homologe Proteine in verschiedenen Spezies, die die gleiche Funktion haben. Entstanden durch Speziation nach einem gemeinsamen Vorfahren.' },
+  { id:11, vl:'vl05', q:'Was ist konvergente Evolution?', opts:['Gleiche Gene in verwandten Arten','Unabhängige Entstehung ähnlicher Merkmale in nicht-verwandten Linien','Genduplikation mit Funktionsdivergenz','Horizontaler Gentransfer'], correct:1, exp:'Konvergente Evolution: Ähnliche Merkmale entstehen unabhängig (keine gemeinsamen Vorfahren). Beispiel: Chymotrypsin und Subtilisin haben fast identische katalytische Triaden, aber keine Sequenzhomologie.' },
+  { id:12, vl:'vl06', q:'Welche Enzymklasse katalysiert Redoxreaktionen?', opts:['Hydrolasen','Isomerasen','Oxidoreduktasen','Lyasen'], correct:2, exp:'Klasse 1: Oxidoreduktasen katalysieren Redoxreaktionen (Elektronenübertragung). Beispiele: LDH, NADH-Dehydrogenase, Alkohol-Dehydrogenase.' },
+  { id:13, vl:'vl06', q:'Was senken Enzyme bei einer chemischen Reaktion?', opts:['Die Gibbs-Freie-Energie ΔG der Reaktion','Die Gleichgewichtskonstante','Die Aktivierungsenergie ΔG‡','Die Reaktionsenthalpie ΔH'], correct:2, exp:'Enzyme senken die Aktivierungsenergie ΔG‡ (nicht ΔG!). Die Thermodynamik der Reaktion (Gleichgewichtslage) bleibt unverändert – nur die Reaktionsgeschwindigkeit steigt.' },
+  { id:14, vl:'vl07', q:'Welche Aminosäuren bilden die katalytische Triade von Trypsin?', opts:['Ser-His-Lys','Asp-His-Ser','Glu-His-Cys','Asp-Lys-Ser'], correct:1, exp:'Die katalytische Triade von Serinproteasen (Trypsin, Chymotrypsin, Elastase): Asp102 – His57 – Ser195. Asp positioniert His; His aktiviert Ser als Nukleophil.' },
+  { id:15, vl:'vl07', q:'Was spaltet Trypsin bevorzugt?', opts:['Nach Phe, Tyr, Trp','Nach Ala, Gly','Nach Lys und Arg','Nach Asp und Glu'], correct:2, exp:'Trypsin spaltet nach Lys und Arg (basische AS), weil die Spezifitätstasche ein negativ geladenes Asp enthält, das diese Seitenketten bindet.' },
+  { id:16, vl:'vl08', q:'Was bedeutet ein niedriger KM-Wert?', opts:['Das Enzym wird schnell gesättigt','Hohe Substrataffinität des Enzyms','Hohe Reaktionsgeschwindigkeit','Niedriges Vmax'], correct:1, exp:'KM ist die Substratkonzentration bei halbmaximaler Geschwindigkeit. Niedriger KM → Enzym erreicht halbmax. Geschwindigkeit bei geringer [S] → hohe Affinität.' },
+  { id:17, vl:'vl08', q:'Bei welcher Wellenlänge absorbiert NADH/NADPH maximal?', opts:['260 nm','280 nm','320 nm','340 nm'], correct:3, exp:'NADH und NADPH haben ein Absorptionsmaximum bei 340 nm. NAD⁺/NADP⁺ absorbieren dort nicht → Basis des optischen Tests zur Enzymaktivitätsbestimmung.' },
+  { id:18, vl:'vl08', q:'Was zeigt der y-Achsenabschnitt im Lineweaver-Burk-Diagramm?', opts:['−1/KM','1/KM','Vmax','1/Vmax'], correct:3, exp:'Im Lineweaver-Burk: y-Achsenabschnitt = 1/Vmax. x-Achsenabschnitt = −1/KM. Steigung = KM/Vmax.' },
+  { id:19, vl:'vl09', q:'Was verändert ein kompetitiver Inhibitor bei der Enzymkinetik?', opts:['Vmax steigt, KM bleibt','KM steigt, Vmax bleibt','Beide sinken','KM sinkt, Vmax steigt'], correct:1, exp:'Kompetitiver Inhibitor: substratanalog, verdrängt Substrat reversibel. KM^app steigt (scheinbar geringere Affinität), Vmax bleibt unverändert (überwindbar durch hohe [S]).' },
+  { id:20, vl:'vl09', q:'Was sind Zymogene?', opts:['Aktive Formen von Enzymen','Irreversible Inhibitoren','Inaktive Vorformen (Proenzyme) von Enzymen','Cofaktoren für Proteasen'], correct:2, exp:'Zymogene (Proenzyme) sind inaktive Vorformen. Aktivierung durch limitierte Proteolyse (Abspaltung eines Hemmungs-Peptids). Beispiel: Trypsinogen → Trypsin durch Enteropeptidase.' },
+  { id:21, vl:'vl09', q:'Wie wirkt ASS (Aspirin) auf die Cyclooxygenase?', opts:['Kompetitiv-reversibel','Nichtkompetitiv-reversibel','Kovalent-irreversibel','Unkompetitiv'], correct:2, exp:'ASS acetyliert kovalent Ser529 der Cyclooxygenase → irreversible Hemmung. Prostglandinsynthese aus Arachidonsäure wird blockiert → Entzündungshemmung, Analgesie, Antipyrese.' },
+  { id:22, vl:'vl09', q:'Was ist das Kennzeichen der homotropen allosterischen Regulation?', opts:['Ein Effektor hemmt immer das Enzym','Das Substrat selbst ist der Effektor → sigmoidale Kinetik','Heterotrope Effektoren bestimmen die Aktivität','Das Enzym folgt Michaelis-Menten-Kinetik'], correct:1, exp:'Bei homotroper Regulation (Kooperativität) ist das Substrat selbst der Effektor. Bindung an eine UE erhöht Affinität der anderen UEs → sigmoidale V/[S]-Kurve (kein Michaelis-Menten!).' },
+  { id:23, vl:'vl09', q:'Welcher Hemmtyp zeigt im Lineweaver-Burk-Diagramm parallele Geraden?', opts:['Kompetitiv','Nichtkompetitiv','Unkompetitiv','Kovalent'], correct:2, exp:'Unkompetitive Inhibition: Vmax↓ und KM↓ im gleichen Verhältnis → parallele Geraden im Lineweaver-Burk-Diagramm.' },
+  { id:24, vl:'vl06', q:'Welches Coenzym überträgt Acylgruppen und hat Pantothensäure als Vitaminvorstufe?', opts:['NAD⁺','Häm','Coenzym A (CoA)','PLP'], correct:2, exp:'Coenzym A (CoA) überträgt Acylgruppen (z.B. Acetyl-CoA). Vitaminvorstufe: Pantothensäure (Vitamin B5).' },
+  { id:25, vl:'vl07', q:'Was ist ein Ribozym?', opts:['Ein Protein-Enzym mit RNA-Cofaktor','Eine RNA mit katalytischer Aktivität','Ein ribosomales Protein','Ein RNA-bindendes Enzym'], correct:1, exp:'Ribozyme sind RNA-Moleküle mit katalytischer Aktivität. Beispiele: RNase P, Ribosomen (aktives Zentrum der Peptidyltransferase), Spleißosomen.' },
+];
+
+// ---- TABLES DATA ----
+const TABLES = {
+  aminosaeure: {
+    title: 'Aminosäuren Übersicht',
+    vl: 'vl03',
+    headers: ['AS (3-Letter)', 'Kürzel', 'Gruppe', 'Besonderheit'],
+    rows: [
+      ['Glycin', 'G', 'Unpolar aliphatisch', 'Kleinste AS, kein Stereozentrum'],
+      ['Alanin', 'A', 'Unpolar aliphatisch', 'Häufigste AS'],
+      ['Valin', 'V', 'Unpolar aliphatisch', 'Verzweigtkettig'],
+      ['Leucin', 'L', 'Unpolar aliphatisch', 'Verzweigtkettig'],
+      ['Isoleucin', 'I', 'Unpolar aliphatisch', 'Verzweigtkettig, 2 Stereozentren'],
+      ['Methionin', 'M', 'Unpolar aliphatisch', 'Thioether, Start-Codon (AUG)'],
+      ['Prolin', 'P', 'Unpolar aliphatisch', 'Imino-AS, bricht Sekundärstrukturen'],
+      ['Phenylalanin', 'F', 'Unpolar aromatisch', 'Benzylseitenkette'],
+      ['Tyrosin', 'Y', 'Unpolar aromatisch', 'Phenolgruppe, Phosphorylierungsstelle'],
+      ['Tryptophan', 'W', 'Unpolar aromatisch', 'Größte AS, Indolring'],
+      ['Serin', 'S', 'Polar (Hydroxyl)', 'Phosphorylierungsstelle'],
+      ['Threonin', 'T', 'Polar (Hydroxyl)', 'Phosphorylierungsstelle'],
+      ['Cystein', 'C', 'Polar (Thiol)', 'Disulfidbrücken (→Cystin)'],
+      ['Asparagin', 'N', 'Polar (Carboxamid)', 'Amid-Seitenkette'],
+      ['Glutamin', 'Q', 'Polar (Carboxamid)', 'Amid-Seitenkette'],
+      ['Aspartat', 'D', 'Negativ geladen', 'pKa ≈ 3.9'],
+      ['Glutamat', 'E', 'Negativ geladen', 'pKa ≈ 4.2'],
+      ['Lysin', 'K', 'Positiv geladen', 'pKa ≈ 10.5'],
+      ['Arginin', 'R', 'Positiv geladen', 'pKa ≈ 12.5, Guanidinium'],
+      ['Histidin', 'H', 'Positiv geladen (pHabh.)', 'pKa ≈ 6, Imidazol, Katalysease'],
+    ],
+    tags: { 'Unpolar aliphatisch': 'tag-blue', 'Unpolar aromatisch': 'tag-purple', 'Polar (Hydroxyl)': 'tag-teal', 'Polar (Thiol)': 'tag-teal', 'Polar (Carboxamid)': 'tag-teal', 'Negativ geladen': 'tag-red', 'Positiv geladen': 'tag-green', 'Positiv geladen (pHabh.)': 'tag-green' }
+  },
+  cofaktoren: {
+    title: 'Coenzyme & Cofaktoren',
+    vl: 'vl06',
+    headers: ['Coenzym', 'Überträgt', 'Vitaminvorstufe', 'Typ'],
+    rows: [
+      ['Häm', 'Elektronen', '(Eisen)', 'Prosthetische Gruppe'],
+      ['NAD⁺/NADH', 'Hydridionen (H⁻)', 'Niacin (B3)', 'Cosubstrat'],
+      ['NADP⁺/NADPH', 'Hydridionen (H⁻)', 'Niacin (B3)', 'Cosubstrat'],
+      ['ATP', 'Phosphatgruppe', '–', 'Cosubstrat'],
+      ['CoA (Coenzym A)', 'Acylgruppen', 'Pantothensäure (B5)', 'Cosubstrat'],
+      ['PLP (Pyridoxalphosphat)', 'Aminogruppen', 'Pyridoxin (B6)', 'Prosthetische Gruppe'],
+      ['Biocytin', 'Carboxylgruppen', 'Biotin (B7)', 'Prosthetische Gruppe'],
+    ],
+    tags: { 'Prosthetische Gruppe': 'tag-purple', 'Cosubstrat': 'tag-blue' }
+  },
+  metalloenzyme: {
+    title: 'Metalloenzyme',
+    vl: 'vl06',
+    headers: ['Metallion', 'Beispielenzym', 'Funktion des Metalls'],
+    rows: [
+      ['Fe (Eisen)', 'NADH-Dehydrogenase', 'Redox-Reaktionen (Elektronenübertragung)'],
+      ['Cu (Kupfer)', 'Cytochrom-Oxidase (COX)', 'Redox-Reaktionen; O₂ → H₂O'],
+      ['Zn (Zink)', 'Carboxypeptidase A', 'Aktivierung der Carbonylgruppe (elektrophile Katalyse)'],
+      ['Mg (Magnesium)', 'RNA-Polymerase, Kinasen', 'Substratbindung (MgATP)'],
+      ['Mo (Molybdän)', 'Nitrogenase', 'Redox (N₂ → NH₃)'],
+    ],
+    tags: {}
+  },
+  enzymklassen: {
+    title: '6 Enzymklassen',
+    vl: 'vl06',
+    headers: ['Klasse', 'Name', 'Reaktionstyp', 'Beispiele'],
+    rows: [
+      ['1', 'Oxidoreduktasen', 'Redoxreaktionen (e⁻-Übertragung)', 'LDH, NADH-Dehydrogenase, Katalase'],
+      ['2', 'Transferasen', 'Übertragung funktioneller Gruppen', 'Kinasen (Phosphat), Aminotransferasen'],
+      ['3', 'Hydrolasen', 'Hydrolytische Spaltung (+ H₂O)', 'Trypsin, Phosphatasen, Lipasen'],
+      ['4', 'Lyasen', 'Eliminierung (nicht hydrolytisch)', 'Pyruvat-Decarboxylase, Aldolase'],
+      ['5', 'Isomerasen', 'Interne Umlagerungen', 'Triosephosphat-Isomerase, Mutasen'],
+      ['6', 'Ligasen / Synthetasen', 'Knüpfung neuer Bindungen (ATP)', 'DNA-Ligase, tRNA-Synthetasen'],
+    ],
+    tags: {}
+  },
+  inhibitoren: {
+    title: 'Inhibitionstypen im Vergleich',
+    vl: 'vl09',
+    headers: ['Typ', 'Bindung an', 'KM-Effekt', 'Vmax-Effekt', 'LB-Diagramm', 'Beispiel'],
+    rows: [
+      ['Kompetitiv', 'Freies Enzym E', 'KM↑', 'Vmax ↔', 'Gleicher y-Abschnitt, versch. Steigung', 'Statine (HMG-CoA-Red.)'],
+      ['Nichtkompetitiv', 'E + ES', 'KM ↔', 'Vmax↓', 'Gleicher x-Abschnitt, versch. Steigung', '–'],
+      ['Unkompetitiv', 'ES-Komplex', 'KM↓', 'Vmax↓', 'Parallele Geraden', 'Lithiumchlorid (Inositolmonophosphatase)'],
+      ['Kovalent (irreversibel)', 'Aktives Zentrum', 'Enzym inaktiv', 'Enzym inaktiv', '–', 'ASS (COX), DFP/Sarin (AChE)'],
+    ],
+    tags: { 'KM↑': 'tag-red', 'KM ↔': 'tag-blue', 'KM↓': 'tag-green', 'Vmax ↔': 'tag-blue', 'Vmax↓': 'tag-red', 'Enzym inaktiv': 'tag-red' }
+  },
+  pharmainhibitoren: {
+    title: 'Pharmakologisch relevante Enzyminhibitoren',
+    vl: 'vl09',
+    headers: ['Wirkstoff', 'Hemmt', 'Inhibitionstyp', 'Wirkung / Indikation'],
+    rows: [
+      ['Statine (z.B. Atorvastatin)', 'HMG-CoA-Reduktase', 'Kompetitiv', 'Cholesterinsenkung, Herz-KV-Schutz'],
+      ['ACE-Hemmer (Captopril, Enalapril, Ramipril)', 'ACE (Angiotensin-konvertierendes Enzym)', 'Kompetitiv', 'Blutdrucksenkung, Herzinsuffizienz'],
+      ['Sulfonamide', 'Dihydropteroatsynthase', 'Kompetitiv', 'Antibiotikum (Folsäuresynthese blockiert)'],
+      ['Ethanol', 'Alkohol-Dehydrogenase (ADH)', 'Kompetitiv (zu Methanol)', 'Methanolvergiftung: Ethanol als Gegenmittel'],
+      ['ASS (Aspirin)', 'Cyclooxygenase (COX, Ser529)', 'Kovalent-irreversibel', 'Entzündungshemmung, Analgesie, Thromboseprophylaxe'],
+      ['DFP, Sarin, Tabun', 'Acetylcholinesterase (Ser195)', 'Kovalent-irreversibel', 'Nervengift; Atemlähmung; Insektizide'],
+      ['α₁-Proteaseinhibitor', 'Leukozyten-Elastase', 'Kovalent-irreversibel (suizidal)', 'Schutz vor unkontrolliertem Lungenabbau'],
+    ],
+    tags: { 'Kompetitiv': 'tag-blue', 'Kovalent-irreversibel': 'tag-red', 'Kovalent-irreversibel (suizidal)': 'tag-red' }
+  },
+  kinetikwerte: {
+    title: 'Kinetische Kenngrößen ausgewählter Enzyme',
+    vl: 'vl08',
+    headers: ['Enzym', 'Substrat', 'KM (mM)', 'kcat (s⁻¹)', 'kcat/KM (M⁻¹s⁻¹)'],
+    rows: [
+      ['Katalase', 'H₂O₂', '25', '10.000.000', '4 × 10⁸'],
+      ['Carboanhydrase', 'CO₂', '12', '600.000', '5 × 10⁷'],
+      ['Acetylcholinesterase', 'Acetylcholin', '0.095', '14.000', '1,5 × 10⁸'],
+      ['Penicillinase', 'Benzylpenicillin', '0.05', '2.000', '4 × 10⁷'],
+      ['Pepsin', 'Protein', '0.3', '30', '1 × 10⁵'],
+    ],
+    tags: {}
+  },
+  diagnostik: {
+    title: 'Enzymdiagnostik: Klinische Marker',
+    vl: 'vl08',
+    headers: ['Enzym/Marker', 'Isoform', 'Lokalisation', 'Klinische Bedeutung'],
+    rows: [
+      ['LDH', 'H4', 'Herzmuskel (Herz-Typ)', 'Herzinfarkt (spät erhöht), Hämolyse'],
+      ['LDH', 'M4', 'Skelettmuskel (Muskel-Typ)', 'Muskelnekrose, Rhabdomyolyse'],
+      ['Kreatinkinase', 'CK-MB', 'Herzmuskel (Myokardtyp)', 'Früher Marker beim akuten Myokardinfarkt'],
+      ['Kreatinkinase', 'CK-MM', 'Skelettmuskel (Muskeltyp)', 'Skelettmuskelnekrose'],
+      ['Troponin T (cTnT)', '–', 'Herzmuskel', 'Goldstandard AMI; lang anhaltend erhöht'],
+      ['Myoglobin', '–', 'Herz- und Skelettmuskel', 'Früh erhöht nach AMI, unspezifisch'],
+      ['ALAT', '–', 'Leber', 'Leberzellschaden (Hepatitis)'],
+    ],
+    tags: {}
+  }
+};
+
+// =========================================================
+// APP STATE
+// =========================================================
+let currentVL = 'vl01';
+let currentTab = 'uebersicht';
+let filteredCards = [];
+let currentCardIdx = 0;
+let cardFlipped = false;
+let activeCategory = 'Alle';
+let quizQuestions = [];
+let currentQuizIdx = 0;
+let quizScore = 0;
+let quizAnswered = false;
+let quizFinished = false;
+
+// =========================================================
+// HELPERS
+// =========================================================
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getCardsForVL(vl) {
+  if (vl === 'all') return ALL_CARDS;
+  return ALL_CARDS.filter(c => c.vl === vl);
+}
+
+function getQuizForVL(vl) {
+  if (vl === 'all') return ALL_QUIZ;
+  return ALL_QUIZ.filter(q => q.vl === vl);
+}
+
+function getTagClass(vl) {
+  return VL_META[vl]?.color || 'tag-blue';
+}
+
+function catColor(cat) {
+  const map = {
+    'Grundlagen': 'tag-blue', 'Struktur': 'tag-purple', 'Wechselwirkungen': 'tag-teal',
+    'Beispiele': 'tag-green', 'Bindung': 'tag-blue', 'Signaling': 'tag-teal',
+    'Motorproteine': 'tag-orange', 'Regulation': 'tag-yellow', 'Aminosäuren': 'tag-green',
+    'Peptidbindung': 'tag-teal', 'α-Helix': 'tag-blue', 'β-Strukturen': 'tag-purple',
+    'Motive': 'tag-teal', 'Tertiär': 'tag-green', 'Domänen': 'tag-orange', 'Quartär': 'tag-purple',
+    'Mutationen': 'tag-red', 'Evolution': 'tag-green', 'Datenbanken': 'tag-blue', 'Proteom': 'tag-teal',
+    'Enzyme': 'tag-yellow', 'Cofaktoren': 'tag-orange', 'Enzymklassen': 'tag-blue', 'Thermodynamik': 'tag-red',
+    'Katalyse': 'tag-purple', 'LDH': 'tag-teal', 'Serinproteasen': 'tag-green', 'Proteasen': 'tag-blue', 'Ribozyme': 'tag-orange',
+    'Kinetik': 'tag-blue', 'Messung': 'tag-teal', 'Diagnostik': 'tag-green',
+    'Inhibition': 'tag-red', 'Pharmakologie': 'tag-orange', 'Allosterie': 'tag-purple', 'Phosphorylierung': 'tag-yellow', 'Zymogene': 'tag-teal',
+  };
+  return map[cat] || 'tag-blue';
+}
+
+// =========================================================
+// RENDER: OVERVIEW
+// =========================================================
+function renderOverview() {
+  const container = document.getElementById('overview-content');
+  let html = '';
+
+  const vlsToShow = currentVL === 'all'
+    ? Object.keys(VL_META)
+    : [currentVL];
+
+  for (const vl of vlsToShow) {
+    const meta = VL_META[vl];
+    const data = OVERVIEW_DATA[vl];
+    if (!data) continue;
+
+    html += `
+    <div style="margin-bottom:var(--space-10)">
+      <div class="vl-hero">
+        <div class="vl-badge">${meta.label}</div>
+        <div class="vl-hero-content">
+          <h1>${meta.emoji} ${meta.title}</h1>
+          <p>Überblick über die wichtigsten Inhalte, Konzepte und klinischen Bezüge dieser Vorlesung.</p>
+        </div>
+      </div>
+      <div class="overview-grid">
+    `;
+
+    for (const topic of data.topics) {
+      html += `
+        <div class="topic-card">
+          <div class="topic-card-header">
+            <div class="topic-icon" style="background:${topic.color}">${topic.icon}</div>
+            <h3>${topic.title}</h3>
+          </div>
+          <ul>
+            ${topic.points.map(p => `<li>${p}</li>`).join('')}
+          </ul>
+          ${topic.formula ? `<div class="formula-box">${topic.formula}</div>` : ''}
+        </div>
+      `;
+    }
+
+    html += `</div></div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+// =========================================================
+// RENDER: FLASHCARDS
+// =========================================================
+function getCategories(cards) {
+  const cats = ['Alle', ...new Set(cards.map(c => c.cat))];
+  return cats;
+}
+
+function initCards() {
+  const rawCards = getCardsForVL(currentVL);
+  const categories = getCategories(rawCards);
+
+  // Category pills
+  const pillsEl = document.getElementById('category-pills');
+  pillsEl.innerHTML = categories.map(cat =>
+    `<button class="pill ${cat === activeCategory ? 'active' : ''}" data-cat="${cat}">${cat}</button>`
+  ).join('');
+
+  // Apply filter
+  const filtered = activeCategory === 'Alle' ? rawCards : rawCards.filter(c => c.cat === activeCategory);
+  filteredCards = [...filtered];
+  currentCardIdx = 0;
+  cardFlipped = false;
+
+  updateCard();
+}
+
+function updateCard() {
+  const card = filteredCards[currentCardIdx];
+  const cardEl = document.getElementById('flashcard');
+  const front = document.getElementById('card-front-text');
+  const back = document.getElementById('card-back-text');
+  const counter = document.getElementById('nav-counter');
+  const progress = document.getElementById('card-progress-bar');
+  const progressLabel = document.getElementById('card-progress-label');
+  const catTag = document.getElementById('card-cat-tag');
+
+  // Reset flip
+  cardFlipped = false;
+  cardEl.classList.remove('flipped');
+
+  if (!card) {
+    front.textContent = 'Keine Karten gefunden.';
+    back.textContent = '';
+    counter.textContent = '0 / 0';
+    progress.style.width = '0%';
+    progressLabel.textContent = '0 / 0';
+    catTag.textContent = '';
+    return;
+  }
+
+  front.textContent = card.q;
+  back.textContent = card.a;
+  catTag.className = `card-cat-tag tag ${catColor(card.cat)}`;
+  catTag.textContent = card.cat;
+  counter.textContent = `${currentCardIdx + 1} / ${filteredCards.length}`;
+  const pct = filteredCards.length > 0 ? Math.round(((currentCardIdx + 1) / filteredCards.length) * 100) : 0;
+  progress.style.width = pct + '%';
+  progressLabel.textContent = `${currentCardIdx + 1} / ${filteredCards.length}`;
+}
+
+// =========================================================
+// RENDER: QUIZ
+// =========================================================
+function initQuiz() {
+  const raw = getQuizForVL(currentVL);
+  quizQuestions = shuffle(raw);
+  currentQuizIdx = 0;
+  quizScore = 0;
+  quizFinished = false;
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  const container = document.getElementById('quiz-container');
+  if (quizFinished) {
+    const pct = Math.round((quizScore / quizQuestions.length) * 100);
+    let emoji = pct >= 90 ? '🏆' : pct >= 70 ? '🎉' : pct >= 50 ? '📚' : '💪';
+    let msg = pct >= 90 ? 'Ausgezeichnet! Du beherrschst den Stoff!' : pct >= 70 ? 'Sehr gut! Noch ein paar Details festigen.' : pct >= 50 ? 'Guter Start! Übe die schwächeren Bereiche.' : 'Weitermachen! Wiederhole die Karteikarten.';
+    container.innerHTML = `
+      <div class="quiz-results fade-in">
+        <div class="results-emoji">${emoji}</div>
+        <div class="results-score">${quizScore} / ${quizQuestions.length} richtig</div>
+        <p class="results-msg">${pct}% – ${msg}</p>
+        <button class="btn-primary" id="quiz-restart">Quiz wiederholen</button>
+      </div>`;
+    document.getElementById('quiz-restart').addEventListener('click', initQuiz);
+    return;
+  }
+
+  const q = quizQuestions[currentQuizIdx];
+  quizAnswered = false;
+  const letters = ['A','B','C','D'];
+  container.innerHTML = `
+    <div class="quiz-header">
+      <div class="progress-bar-outer" style="flex:1">
+        <div class="progress-bar-inner" style="width:${Math.round((currentQuizIdx/quizQuestions.length)*100)}%"></div>
+      </div>
+      <span class="quiz-score-display">✓ ${quizScore}</span>
+    </div>
+    <div class="quiz-question fade-in">
+      <div class="quiz-q-number">Frage ${currentQuizIdx+1} von ${quizQuestions.length} · <span class="${getTagClass(q.vl)} tag">${VL_META[q.vl].label}</span></div>
+      <div class="quiz-q-text">${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((opt, i) => `
+          <button class="quiz-option" data-idx="${i}">
+            <span class="option-letter">${letters[i]}</span>
+            <span>${opt}</span>
+          </button>`).join('')}
+      </div>
+      <div class="explanation-box" id="explanation">${q.exp}</div>
+    </div>
+    <div class="quiz-footer">
+      <button class="btn-primary" id="next-q-btn" style="display:none">Nächste Frage →</button>
+    </div>`;
+
+  container.querySelectorAll('.quiz-option').forEach(btn => {
+    btn.addEventListener('click', () => handleQuizAnswer(btn, q));
+  });
+}
+
+function handleQuizAnswer(btn, q) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const chosen = parseInt(btn.dataset.idx);
+  const opts = document.querySelectorAll('.quiz-option');
+  opts.forEach(b => b.disabled = true);
+  opts[q.correct].classList.add('correct');
+  if (chosen === q.correct) {
+    quizScore++;
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+  }
+  document.getElementById('explanation').classList.add('visible');
+  const nextBtn = document.getElementById('next-q-btn');
+  nextBtn.style.display = 'block';
+  nextBtn.addEventListener('click', () => {
+    currentQuizIdx++;
+    if (currentQuizIdx >= quizQuestions.length) quizFinished = true;
+    renderQuizQuestion();
+  });
+}
+
+// =========================================================
+// RENDER: TABLES
+// =========================================================
+function renderTables() {
+  const container = document.getElementById('tables-content');
+  let html = '';
+
+  const vlsToShow = currentVL === 'all' ? null : currentVL;
+
+  for (const [key, tbl] of Object.entries(TABLES)) {
+    if (vlsToShow && tbl.vl !== vlsToShow && currentVL !== 'all') {
+      // Only show tables for current VL
+      if (tbl.vl !== currentVL) continue;
+    }
+
+    html += `
+    <div class="table-section">
+      <h2 class="section-title">
+        <span class="tag ${getTagClass(tbl.vl)}">${VL_META[tbl.vl].label}</span>
+        ${tbl.title}
+      </h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>${tbl.headers.map(h => `<th>${h}</th>`).join('')}</tr>
+          </thead>
+          <tbody>
+            ${tbl.rows.map(row => `
+              <tr>
+                ${row.map((cell, i) => {
+                  const tagClass = tbl.tags[cell];
+                  const content = tagClass ? `<span class="tag ${tagClass}">${cell}</span>` : cell;
+                  return `<td>${content}</td>`;
+                }).join('')}
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+  }
+
+  if (!html) html = '<p class="empty-state">Keine Tabellen für diese Auswahl.</p>';
+  container.innerHTML = html;
+}
+
+// =========================================================
+// EVENT HANDLERS
+// =========================================================
+// VL Navigation
+document.querySelectorAll('.vl-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.vl-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentVL = btn.dataset.vl;
+    activeCategory = 'Alle';
+    refreshCurrentTab();
+  });
+});
+
+// Tab Navigation
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentTab = btn.dataset.tab;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(`page-${currentTab}`).classList.add('active');
+    refreshCurrentTab();
+  });
+});
+
+function refreshCurrentTab() {
+  if (currentTab === 'uebersicht') renderOverview();
+  else if (currentTab === 'karteikarten') initCards();
+  else if (currentTab === 'quiz') initQuiz();
+  else if (currentTab === 'tabellen') renderTables();
+}
+
+// Category pills (event delegation)
+document.getElementById('category-pills').addEventListener('click', (e) => {
+  const pill = e.target.closest('.pill');
+  if (!pill) return;
+  activeCategory = pill.dataset.cat;
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  const rawCards = getCardsForVL(currentVL);
+  filteredCards = activeCategory === 'Alle' ? [...rawCards] : rawCards.filter(c => c.cat === activeCategory);
+  currentCardIdx = 0;
+  updateCard();
+});
+
+// Flashcard flip
+document.getElementById('flashcard').addEventListener('click', () => {
+  cardFlipped = !cardFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', cardFlipped);
+});
+document.getElementById('flashcard').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    cardFlipped = !cardFlipped;
+    document.getElementById('flashcard').classList.toggle('flipped', cardFlipped);
+  }
+});
+
+// Card navigation
+document.getElementById('prev-btn').addEventListener('click', () => {
+  if (currentCardIdx > 0) { currentCardIdx--; updateCard(); }
+});
+document.getElementById('next-btn').addEventListener('click', () => {
+  if (currentCardIdx < filteredCards.length - 1) { currentCardIdx++; updateCard(); }
+});
+
+// Keyboard navigation for cards
+document.addEventListener('keydown', (e) => {
+  if (currentTab !== 'karteikarten') return;
+  if (e.key === 'ArrowRight' && currentCardIdx < filteredCards.length - 1) { currentCardIdx++; updateCard(); }
+  if (e.key === 'ArrowLeft' && currentCardIdx > 0) { currentCardIdx--; updateCard(); }
+  if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    cardFlipped = !cardFlipped;
+    document.getElementById('flashcard').classList.toggle('flipped', cardFlipped);
+  }
+});
+
+// Shuffle
+document.getElementById('shuffle-btn').addEventListener('click', () => {
+  filteredCards = shuffle(filteredCards);
+  currentCardIdx = 0;
+  updateCard();
+});
+
+// Reset
+document.getElementById('reset-btn').addEventListener('click', () => {
+  activeCategory = 'Alle';
+  initCards();
+});
+
+// Theme toggle
+(function() {
+  const t = document.querySelector('[data-theme-toggle]');
+  const r = document.documentElement;
+  let d = 'dark';
+  r.setAttribute('data-theme', d);
+  t && t.addEventListener('click', () => {
+    d = d === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', d);
+    t.innerHTML = d === 'dark'
+      ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+      : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  });
+})();
+
+// =========================================================
+// INIT
+// =========================================================
+renderOverview();
+</script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>
