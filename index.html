@@ -2145,6 +2145,10 @@ const VL_META = {
   vl07: { label: 'VL07', title: 'Mechanismen der Katalyse', color: 'tag-red', emoji: '🔬' },
   vl08: { label: 'VL08', title: 'Bestimmung der Enzymaktivität', color: 'tag-blue', emoji: '📊' },
   vl09: { label: 'VL09', title: 'Regulation der Enzymaktivität', color: 'tag-purple', emoji: '🎛️' },
+
+  m01: { label: 'VL01', title: 'Einführung', color: 'tag-teal', emoji: '🧠' },
+  m02: { label: 'VL02', title: 'Bezugssysteme von Gesundheit und Krankheit', color: 'tag-blue', emoji: '🏥' },
+  m03: { label: 'VL03', title: 'Gesundheits- und Krankheitsmodelle', color: 'tag-green', emoji: '📚' }
 };
 
 // ---- OVERVIEW DATA ----
@@ -6263,6 +6267,26 @@ const SUBJECTS = {
     icon: '🧬',
     accentColor: '#5b80f5',
     localStoragePrefix: 'biochemie',
+    mug1: {
+  id: 'mug1',
+  name: 'Mensch und Gesellschaft I',
+  subtitle: 'DPU Vorklinik',
+  icon: '🧠',
+  accentColor: '#0d9488',
+  localStoragePrefix: 'mug1',
+  sidebarGroups: [
+    {
+      id: 'grundlagen',
+      label: 'Teil I · Grundlagen',
+      color: '#0d9488',
+      items: [
+        { vl: 'm01', code: 'VL01', title: 'Einführung' },
+        { vl: 'm02', code: 'VL02', title: 'Bezugssysteme von Gesundheit und Krankheit' },
+        { vl: 'm03', code: 'VL03', title: 'Gesundheits- und Krankheitsmodelle' }
+      ]
+    }
+  ]
+},
 sidebarGroups: [
   {
     id: 'teil12',
