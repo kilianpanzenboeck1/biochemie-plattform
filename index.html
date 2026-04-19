@@ -7008,9 +7008,25 @@ function showDashboard() {
 }
 
 function switchSubject(subjectId) {
-  if (!SUBJECTS[subjectId]) return;
-  currentSubject = subjectId;
   const subject = SUBJECTS[subjectId];
+  if (!subject) return;
+
+  currentSubject = subjectId;
+
+  const firstGroup = subject.sidebarGroups?.[0];
+  const firstItem = firstGroup?.items?.[0];
+  if (firstItem?.vl) {
+    currentVL = firstItem.vl;
+  }
+
+  renderSubjectSwitcher();
+  renderSidebarNav(currentSubject);
+
+  if (typeof updateSubjectUI === 'function') updateSubjectUI();
+  if (typeof renderActiveVL === 'function') renderActiveVL();
+  if (typeof renderOverview === 'function') renderOverview();
+  if (typeof renderAll === 'function') renderAll();
+}
 
   // Update storage keys
   updateStorageKeys(subjectId);
