@@ -942,3 +942,49 @@ const S_TABLES = {
     tags: {}
   },
 };
+const MUG1_OVERVIEW_DATA = {
+  m01: {
+    lernziele: [
+      'Hauptansätze der Medizinischen Psychologie und Medizinischen Soziologie beschreiben und abgrenzen.',
+      'Wesentliche Handlungsfelder der beiden Fächer benennen.',
+      'Ebenen der Gesundheitsversorgung unterscheiden und zentrale Akteure zuordnen.',
+      'Das biopsychosoziale Krankheitsmodell beschreiben.'
+    ],
+    topics: [
+      'Medizinische Psychologie: Erleben und Verhalten im medizinischen Kontext.',
+      'Medizinische Soziologie: soziale Strukturen und Einflüsse auf Gesundheit und Krankheit.',
+      'Biopsychosoziales Modell als Verbindung körperlicher, psychischer und sozialer Faktoren.',
+      'Gesundheitsversorgung auf Mikro-, Meso-, Makro- und Supraebene.'
+    ]
+  },
+
+  m02: {
+    lernziele: [
+      'Normbegriffe von Gesundheit und Krankheit erklären.',
+      'Kausale Risikofaktoren und Risikoindikatoren unterscheiden.',
+      'Gesundheitsbezogene Lebensqualität beschreiben.',
+      'Subjektive Krankheitstheorien und ihre Auswirkungen erläutern.'
+    ],
+    topics: [
+      'Gesundheit und Krankheit aus medizinischer, subjektiver und gesellschaftlicher Perspektive.',
+      'Befund und Befinden können voneinander abweichen.',
+      'ICD, DSM und ICF klassifizieren Krankheit unterschiedlich.',
+      'Stigmatisierung psychisch Kranker beeinflusst Versorgung und Teilhabe.'
+    ]
+  },
+
+  m03: {
+    lernziele: [
+      'Gesundheitsverhalten sozialpsychologisch und soziologisch skizzieren.',
+      'Rollen, Normen und Einstellungen als Einflussfaktoren erklären.',
+      'Schutz- und Risikofaktoren benennen.',
+      'Modelle gesundheitsrelevanten Verhaltens anwenden.'
+    ],
+    topics: [
+      'Gesundheitsverhalten wird durch Rollen, Normen, Einstellungen und Interaktion geprägt.',
+      'Soziale Unterstützung ist ein zentraler Schutzfaktor.',
+      'Resilienz, Selbstwirksamkeit und Optimismus fördern gesundheitsrelevantes Verhalten.',
+      'Salutogenese und sozialpsychologische Modelle erklären Gesundheitsverhalten.'
+    ]
+  }
+};
