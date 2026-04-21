@@ -508,6 +508,98 @@
     .termin-card .lat   { color: #2563eb; }
     body.dark .termin-card .lat { color: #60a5fa; }
 
+    /* ── Prüfungsmodus ── */
+    .pruef-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .pruef-progress-wrap {
+      width: 100%;
+      background: var(--border);
+      border-radius: 99px;
+      height: 8px;
+    }
+    .pruef-progress-bar {
+      height: 8px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      transition: width 0.4s;
+    }
+    .pruef-progress-label {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .pruef-card {
+      width: 100%;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+      min-height: 200px;
+    }
+    .pruef-quelle {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .pruef-question {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .pruef-answer {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      white-space: pre-wrap;
+    }
+    .pruef-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .pruef-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 11px 22px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .pruef-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .pruef-btn-show   { background: var(--accent); color: #fff; padding: 12px 32px; font-size: 1rem; }
+    .pruef-btn-wieder { background: #fee2e2; color: #991b1b; }
+    .pruef-btn-gut    { background: #dbeafe; color: #1e40af; }
+    .pruef-btn-perfekt{ background: #dcfce7; color: #166534; }
+    body.dark .pruef-btn-wieder  { background: #450a0a; color: #fca5a5; }
+    body.dark .pruef-btn-gut     { background: #1e3a5f; color: #93c5fd; }
+    body.dark .pruef-btn-perfekt { background: #14532d; color: #86efac; }
+
+    .pruef-done {
+      text-align: center;
+      padding: 48px 32px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+    }
+    .pruef-done h2 { font-size: 1.5rem; margin-bottom: 8px; }
+    .pruef-done p  { color: var(--muted); margin-bottom: 20px; }
+
     /* ── Responsive ── */
     @media (max-width: 700px) {
       .hamburger { display: block; }
@@ -744,8 +836,102 @@
       `;
       renderTerminContent('lage');
     }
+    // ── Prüfungsmodus ──────────────────────────────────────────
+    let pruefQueue       = [];
+    let pruefStartLength = 0;
+    let pruefShowAnswer  = false;
+
+    function buildPruefQueue() {
+      const q = [];
+      AN_CARDS.forEach(c => {
+        const src = AN_OVERVIEW[c.vl] ? AN_OVERVIEW[c.vl].title : c.vl;
+        q.push({ q: c.q, a: c.a, quelle: src });
+      });
+      terminologieData.karteikarten.forEach(c =>
+        q.push({ q: c.q, a: c.a, quelle: 'Terminologie' })
+      );
+      for (let i = q.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [q[i], q[j]] = [q[j], q[i]];
+      }
+      return q;
+    }
+
+    function showPruefCard() {
+      if (!pruefQueue.length) { showPruefDone(); return; }
+      pruefShowAnswer = false;
+      const card = pruefQueue[0];
+      const done = pruefStartLength - pruefQueue.length;
+      const pct  = Math.round(done / pruefStartLength * 100);
+
+      document.getElementById('pruef-area').innerHTML = `
+        <div class="pruef-wrap">
+          <div style="width:100%">
+            <div class="pruef-progress-label">
+              <span>${done} erledigt</span>
+              <span>${pruefQueue.length} verbleibend</span>
+            </div>
+            <div class="pruef-progress-wrap" style="margin-top:6px">
+              <div class="pruef-progress-bar" style="width:${pct}%"></div>
+            </div>
+          </div>
+
+          <div class="pruef-card">
+            <div class="pruef-quelle">${card.quelle}</div>
+            <div class="pruef-question">${card.q}</div>
+            <div class="pruef-answer" id="pruef-answer" hidden>${card.a}</div>
+          </div>
+
+          <div class="pruef-btns" id="pruef-btns">
+            <button class="pruef-btn pruef-btn-show" onclick="pruefReveal()">Antwort zeigen</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function pruefReveal() {
+      pruefShowAnswer = true;
+      document.getElementById('pruef-answer').hidden = false;
+      document.getElementById('pruef-btns').innerHTML = `
+        <button class="pruef-btn pruef-btn-wieder"  onclick="pruefWieder()">🔁 Wieder</button>
+        <button class="pruef-btn pruef-btn-gut"     onclick="pruefWeiter()">👍 Gut</button>
+        <button class="pruef-btn pruef-btn-perfekt" onclick="pruefWeiter()">⭐ Perfekt</button>
+      `;
+    }
+
+    function pruefWieder() {
+      const card = pruefQueue.shift();
+      const insertAt = Math.min(4, pruefQueue.length);
+      pruefQueue.splice(insertAt, 0, card);
+      showPruefCard();
+    }
+
+    function pruefWeiter() {
+      pruefQueue.shift();
+      showPruefCard();
+    }
+
+    function showPruefDone() {
+      document.getElementById('pruef-area').innerHTML = `
+        <div class="pruef-wrap">
+          <div class="pruef-done">
+            <div style="font-size:3rem;margin-bottom:12px">🎉</div>
+            <h2>Alle Karten geschafft!</h2>
+            <p>Du hast alle ${pruefStartLength} Karten erfolgreich gelernt.</p>
+            <button class="pruef-btn pruef-btn-show" onclick="renderPruef()">↺ Nochmal starten</button>
+          </div>
+        </div>
+      `;
+    }
+
     function renderPruef() {
-      document.getElementById('view').innerHTML = '<p style="color:var(--muted)">Prüfungsmodus – kommt in Schritt 10</p>';
+      pruefQueue       = buildPruefQueue();
+      pruefStartLength = pruefQueue.length;
+      document.getElementById('view').innerHTML = `
+        <h2 style="margin-bottom:20px">🎯 Prüfungsmodus</h2>
+        <div id="pruef-area"></div>
+      `;
+      showPruefCard();
     }
 
     // ── Block-Hilfsfunktionen ──────────────────────────────────
