@@ -318,18 +318,18 @@ rows: [
 // =========================================================
 if (typeof MNEMONICS !== ‘undefined’) {
 Object.assign(MNEMONICS, {
-an01: { text: ‘🧫 Grundgewebe = E-B-M-N: “Echte Bären Mögen Nudeln” → Epithel, Bindegewebe, Muskel, Nervengewebe’ },
-an02: { text: ‘🦴 SITS = Rotatorenmanschette, aber für Knochen: Osteoblasten Bauen, Osteoklasten Kratzen (OB = Aufbau, OK = Abbau)’ },
-an03: { text: ‘🔗 Gelenkachsen: “Eine Schiene – Zwei Eier – Drei Kugeln” → 1-achsig=Scharnier, 2-achsig=Ei/Sattel, 3-achsig=Kugel’ },
-an04: { text: ‘💪 Sarkomere bei Kontraktion: “I and H shrink, A stays” → I-Band und H-Zone kürzer, A-Band konstant’ },
-an05: { text: ‘🦴 Wirbelsäule: “Hessen Brauchen Lustig Sexy Choreos” → HWS(7), BWS(12), LWS(5), Sakrum(5), Coccyx’ },
-an06: { text: ‘⚡ VAN-Regel: “Viele Autos Nerven” = Vena, Arteria, Nervus (von oben) am Rippenunterrand’ },
-an07: { text: ‘💪 SITS = Rotatorenmanschette: Supraspinatus, Infraspinatus, Teres minor, Subscapularis’ },
-an08: { text: ‘✋ Handwurzelknochen proximal→distal: “Ein Lump Trieb Prostitution, Trug Tiefe Christliche Haltung” → Sk, Lu, Tri, Pi, Tra, Trd, Ka, Ha’ },
-an09: { text: ‘🏃 N. phrenicus Merkregel: “C3, 4, 5 keeps the diaphragm alive!” (Ausfall → Atemlähmung!)’ },
-an10: { text: ‘😢 Unhappy Triad = VKB + MCL + Meniskus medialis: “Alle drei sind medial betroffen + VKB”’ },
-an11: { text: ‘🦶 OSG = Plantarflexion/Dorsalextension; USG = Inversion/Eversion: “Oben streckt, Unten dreht”’ },
-an12: { text: ‘⚡ Aktionspotenzial: “Depol = Na rein, Repol = K raus” – Natrium Rein = Depolarisation’ },
+an01: { mnemonic: ‘🧫 Grundgewebe = E-B-M-N: “Echte Bären Mögen Nudeln” → Epithel, Bindegewebe, Muskel, Nervengewebe’ },
+an02: { mnemonic: ‘🦴 Osteoblasten Bauen, Osteoklasten Kratzen (OB = Aufbau, OK = Abbau)’ },
+an03: { mnemonic: ‘🔗 Gelenkachsen: “Eine Schiene – Zwei Eier – Drei Kugeln” → 1-achsig=Scharnier, 2-achsig=Ei/Sattel, 3-achsig=Kugel’ },
+an04: { mnemonic: ‘💪 Sarkomere bei Kontraktion: “I and H shrink, A stays” → I-Band und H-Zone kürzer, A-Band konstant’ },
+an05: { mnemonic: ‘🦴 Wirbelsäule: “Hessen Brauchen Lustig Sexy Choreos” → HWS(7), BWS(12), LWS(5), Sakrum(5), Coccyx’ },
+an06: { mnemonic: ‘⚡ VAN-Regel: “Viele Autos Nerven” = Vena, Arteria, Nervus (von oben) am Rippenunterrand’ },
+an07: { mnemonic: ‘💪 SITS = Rotatorenmanschette: Supraspinatus, Infraspinatus, Teres minor, Subscapularis’ },
+an08: { mnemonic: ‘✋ Handwurzelknochen: “Ein Lump Trieb Prostitution, Trug Tiefe Christliche Haltung” → Sk, Lu, Tri, Pi, Tra, Trd, Ka, Ha’ },
+an09: { mnemonic: ‘🏃 N. phrenicus: “C3, 4, 5 keeps the diaphragm alive!” (Ausfall → Atemlähmung!)’ },
+an10: { mnemonic: ‘😢 Unhappy Triad = VKB + MCL + Meniskus medialis: “Alle drei sind medial betroffen + VKB”’ },
+an11: { mnemonic: ‘🦶 OSG = Plantarflexion/Dorsalextension; USG = Inversion/Eversion: “Oben streckt, Unten dreht”’ },
+an12: { mnemonic: ‘⚡ Aktionspotenzial: “Depol = Na rein, Repol = K raus” – Natrium Rein = Depolarisation’ },
 });
 }
 
@@ -419,12 +419,41 @@ items: [
 // =========================================================
 // INJECT INTO GLOBAL DATA ARRAYS
 // =========================================================
-if (typeof VL_META !== ‘undefined’) Object.assign(VL_META, AN_META);
-if (typeof OVERVIEW_DATA !== ‘undefined’) Object.assign(OVERVIEW_DATA, AN_OVERVIEW);
-if (typeof ALL_CARDS !== ‘undefined’) ALL_CARDS.push(...AN_CARDS);
-if (typeof ALL_QUIZ !== ‘undefined’) ALL_QUIZ.push(...AN_QUIZ);
-if (typeof TABLES !== ‘undefined’) Object.assign(TABLES, AN_TABLES);
+// VL_META: Plattform braucht zusätzlich `title` und `emoji`
+if (typeof VL_META !== ‘undefined’) {
+  const enriched = {};
+  Object.keys(AN_META).forEach(vlId => {
+    const m  = AN_META[vlId];
+    const ov = AN_OVERVIEW[vlId];
+    enriched[vlId] = {
+      ...m,
+      title: ov ? ov.title : m.label,
+      emoji: ov && ov.themes && ov.themes[0] ? ov.themes[0].icon : ‘📚’,
+    };
+  });
+  Object.assign(VL_META, enriched);
+}
 
-// Nach dem Laden den Subject-Switcher neu rendern,
-// damit Anatomie 1 sofort als Fach erscheint
+// OVERVIEW_DATA: Plattform braucht { topics: [{icon,title,color,points}] }
+// anatomie_data liefert { themes: [{icon,title,points}] }
+if (typeof OVERVIEW_DATA !== ‘undefined’) {
+  const transformed = {};
+  Object.keys(AN_OVERVIEW).forEach(vlId => {
+    transformed[vlId] = {
+      topics: (AN_OVERVIEW[vlId].themes || []).map(t => ({
+        icon:   t.icon,
+        title:  t.title,
+        color:  ‘#6b7280’,
+        points: t.points,
+      })),
+    };
+  });
+  Object.assign(OVERVIEW_DATA, transformed);
+}
+
+if (typeof ALL_CARDS !== ‘undefined’) ALL_CARDS.push(...AN_CARDS);
+if (typeof ALL_QUIZ  !== ‘undefined’) ALL_QUIZ.push(...AN_QUIZ);
+if (typeof TABLES    !== ‘undefined’) Object.assign(TABLES, AN_TABLES);
+
+// Subject-Switcher neu rendern sobald Anatomie registriert ist
 if (typeof renderSubjectSwitcher === ‘function’) renderSubjectSwitcher();
