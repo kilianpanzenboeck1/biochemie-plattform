@@ -7,18 +7,18 @@
 // META
 // =========================================================
 const AN_META = {
-an01: { label: ‘Zelle & Gewebe’, color: ‘tag-teal’,   group: ‘Grundlagen’ },
-an02: { label: ‘Knochen & Knorpel’, color: ‘tag-blue’,   group: ‘Grundlagen’ },
-an03: { label: ‘Gelenke’,        color: ‘tag-purple’, group: ‘Grundlagen’ },
-an04: { label: ‘Skelettmuskel’,  color: ‘tag-orange’, group: ‘Bewegungsapparat’ },
-an05: { label: ‘Wirbelsäule’,    color: ‘tag-green’,  group: ‘Bewegungsapparat’ },
-an06: { label: ‘Thorax’,         color: ‘tag-indigo’, group: ‘Rumpf’ },
-an07: { label: ‘Schulter & Arm’, color: ‘tag-rose’,   group: ‘Obere Extremität’ },
-an08: { label: ‘Unterarm & Hand’,color: ‘tag-yellow’, group: ‘Obere Extremität’ },
-an09: { label: ‘Becken & Hüfte’, color: ‘tag-teal’,   group: ‘Untere Extremität’ },
-an10: { label: ‘Knie & Unterschenkel’, color: ‘tag-blue’, group: ‘Untere Extremität’ },
-an11: { label: ‘Fuß’,            color: ‘tag-purple’, group: ‘Untere Extremität’ },
-an12: { label: ‘Neuroanatomie Grundlagen’, color: ‘tag-red’, group: ‘Neuroanatomie’ },
+an01: { label: ‘AN01’, title: ‘Zelle & Gewebe’,            emoji: ‘🔬’, color: ‘tag-teal’,   group: ‘Grundlagen’ },
+an02: { label: ‘AN02’, title: ‘Knochen & Knorpel’,         emoji: ‘🦴’, color: ‘tag-blue’,   group: ‘Grundlagen’ },
+an03: { label: ‘AN03’, title: ‘Gelenke (Arthrologie)’,      emoji: ‘🔗’, color: ‘tag-purple’, group: ‘Grundlagen’ },
+an04: { label: ‘AN04’, title: ‘Skelettmuskel’,              emoji: ‘💪’, color: ‘tag-orange’, group: ‘Bewegungsapparat’ },
+an05: { label: ‘AN05’, title: ‘Wirbelsäule’,                emoji: ‘🦴’, color: ‘tag-green’,  group: ‘Bewegungsapparat’ },
+an06: { label: ‘AN06’, title: ‘Thorax’,                     emoji: ‘🫀’, color: ‘tag-indigo’, group: ‘Rumpf’ },
+an07: { label: ‘AN07’, title: ‘Schulter & Arm’,             emoji: ‘🦾’, color: ‘tag-rose’,   group: ‘Obere Extremität’ },
+an08: { label: ‘AN08’, title: ‘Unterarm & Hand’,            emoji: ‘✋’, color: ‘tag-yellow’, group: ‘Obere Extremität’ },
+an09: { label: ‘AN09’, title: ‘Becken & Hüfte’,             emoji: ‘🦴’, color: ‘tag-teal’,   group: ‘Untere Extremität’ },
+an10: { label: ‘AN10’, title: ‘Knie & Unterschenkel’,       emoji: ‘🦵’, color: ‘tag-blue’,   group: ‘Untere Extremität’ },
+an11: { label: ‘AN11’, title: ‘Fuß’,                        emoji: ‘🦶’, color: ‘tag-purple’, group: ‘Untere Extremität’ },
+an12: { label: ‘AN12’, title: ‘Neuroanatomie Grundlagen’,   emoji: ‘🧠’, color: ‘tag-red’,    group: ‘Neuroanatomie’ },
 };
 
 // =========================================================
@@ -212,7 +212,7 @@ const AN_QUIZ = [
 { id:‘anq02_2’, vl:‘an02’, q:‘Welcher Knorpeltyp kommt in Bandscheiben und der Symphysis pubica vor?’, opts:[‘Hyaliner Knorpel’,‘Elastischer Knorpel’,‘Faserknorpel’,‘Verknöcherter Knorpel’], correct:2, exp:‘Faserknorpel (mit reichlich Kollagen Typ I) findet sich in mechanisch stark beanspruchten Strukturen wie Bandscheiben und der Schambeinfuge.’ },
 
 // AN03
-{ id:‘anq03_1’, vl:‘an03’, q:‘Ein Daumensattelgelenk ist ein…’, opts:[‘1-achsiges Scharniergelenk’,‘2-achsiges Sattelgelenk’,‘3-achsiges Kugelgelenk’,‘2-achsiges Eigelenk’], correct:1, exp:‘Das Daumensattelgelenk (CMC I) ist ein 2-achsiges Sattelgelenk und ermöglicht Flexion/Extension sowie Ab-/Adduktion, nicht jedoch vollständige Rotation.’ },
+{ id:‘anq03_1’, vl:‘an03’, q:‘Ein Daumensattelgelenk ist ein...’, opts:[‘1-achsiges Scharniergelenk’,‘2-achsiges Sattelgelenk’,‘3-achsiges Kugelgelenk’,‘2-achsiges Eigelenk’], correct:1, exp:‘Das Daumensattelgelenk (CMC I) ist ein 2-achsiges Sattelgelenk und ermöglicht Flexion/Extension sowie Ab-/Adduktion, nicht jedoch vollständige Rotation.’ },
 
 // AN04
 { id:‘anq04_1’, vl:‘an04’, q:‘Welches Band ändert seine Länge NICHT bei Kontraktion des Sarkomer?’, opts:[‘I-Band’,‘H-Zone’,‘A-Band’,‘Z-Scheiben-Abstand’], correct:2, exp:‘Beim Gleitfilamentmodell bleibt das A-Band (Myosinlänge) konstant. I-Band und H-Zone werden kürzer, weil Aktin über Myosin gleitet.’ },
@@ -222,7 +222,7 @@ const AN_QUIZ = [
 { id:‘anq05_1’, vl:‘an05’, q:‘Welche Bewegung findet hauptsächlich im Atlantoaxialgelenk (C1/C2) statt?’, opts:[‘Nickbewegung (Flexion)’,‘Rotation (“Nein-sagen”)’,‘Seitneigung’,‘Extensionsbewegung’], correct:1, exp:‘Im Atlantoaxialgelenk rotiert der Atlas um den Dens axis → Kopfrotation (Nein-Bewegung). Das Atlantookzipitalgelenk ermöglicht das Nicken.’ },
 
 // AN06
-{ id:‘anq06_1’, vl:‘an06’, q:‘Nach der VAN-Regel liegt die Arteria intercostalis…’, opts:[‘Oberhalb der Rippe’,‘Am Unterrand der Rippe, zwischen Vene und Nerv’,‘Am Unterrand der Rippe als unterste Struktur’,‘Inmitten des Interkostalmuskels ohne feste Lage’], correct:1, exp:‘VAN = Vene (oben), Arterie (mitte), Nerv (unten) – alle am Unterrand der Rippe. Thorakozentese am Oberrand der unteren Rippe zum Schutz!’ },
+{ id:‘anq06_1’, vl:‘an06’, q:‘Nach der VAN-Regel liegt die Arteria intercostalis...’, opts:[‘Oberhalb der Rippe’,‘Am Unterrand der Rippe, zwischen Vene und Nerv’,‘Am Unterrand der Rippe als unterste Struktur’,‘Inmitten des Interkostalmuskels ohne feste Lage’], correct:1, exp:‘VAN = Vene (oben), Arterie (mitte), Nerv (unten) – alle am Unterrand der Rippe. Thorakozentese am Oberrand der unteren Rippe zum Schutz!’ },
 
 // AN07
 { id:‘anq07_1’, vl:‘an07’, q:‘Welcher Nerv wird bei einer Humerusschaft-Fraktur häufig verletzt?’, opts:[‘N. medianus’,‘N. ulnaris’,‘N. radialis’,‘N. musculocutaneus’], correct:2, exp:‘N. radialis verläuft im Sulcus nervi radialis am Humerusschaft und ist daher bei Diaphysenfrakturen oft mitbetroffen → Fallhand (Extensionsausfall).’ },
@@ -372,7 +372,7 @@ color: ‘#14b8a6’,
 items: [
 { vl: ‘an01’, code: ‘AN01’, title: ‘Zelle & Gewebe’ },
 { vl: ‘an02’, code: ‘AN02’, title: ‘Knochen & Knorpel’ },
-{ vl: ‘an03’, code: ‘AN03’, title: ‘Gelenke’ },
+{ vl: ‘an03’, code: ‘AN03’, title: ‘Gelenke (Arthrologie)’ },
 { vl: ‘an04’, code: ‘AN04’, title: ‘Skelettmuskel’ },
 ]
 },
@@ -419,6 +419,11 @@ items: [
 // =========================================================
 // INJECT INTO GLOBAL DATA ARRAYS
 // =========================================================
+if (typeof VL_META !== ‘undefined’) Object.assign(VL_META, AN_META);
+if (typeof OVERVIEW_DATA !== ‘undefined’) Object.assign(OVERVIEW_DATA, AN_OVERVIEW);
+if (typeof ALL_CARDS !== ‘undefined’) ALL_CARDS.push(...AN_CARDS);
+if (typeof ALL_QUIZ !== ‘undefined’) ALL_QUIZ.push(...AN_QUIZ);
+if (typeof TABLES !== ‘undefined’) Object.assign(TABLES, AN_TABLES);
 // VL_META: Plattform braucht zusätzlich `title` und `emoji`
 if (typeof VL_META !== ‘undefined’) {
   const enriched = {};
