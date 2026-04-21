@@ -4,11 +4,160 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anatomie 1 – DPU Lernplattform</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #e11d48;
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #1a2233;
+      --muted: #6b7280;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --sidebar-w: 260px;
+      --header-h: 56px;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    #hdr {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--header-h);
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      gap: 12px;
+    }
+    .hdr-logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    #dark-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--text);
+      padding: 4px 8px;
+    }
+
+    /* ── Layout ── */
+    .shell {
+      display: flex;
+      height: calc(100vh - var(--header-h));
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: var(--sidebar-w);
+      min-width: var(--sidebar-w);
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 12px 0;
+    }
+    .nav-section-links {
+      padding: 4px 12px;
+    }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.875rem;
+      transition: background 0.15s;
+    }
+    .nav-link:hover { background: var(--bg); }
+    .nav-link.active { background: var(--accent); color: #fff; }
+    .nav-link.active .nav-dot { border-color: rgba(255,255,255,0.6); }
+    .nav-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 8px 12px;
+    }
+    .nav-group-label {
+      padding: 8px 24px 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nav-code {
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: var(--bg);
+      border-radius: 4px;
+      padding: 1px 5px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .nav-link.active .nav-code { background: rgba(255,255,255,0.2); color: #fff; }
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+    }
+    .nav-dot.visited { border-color: var(--muted); background: var(--muted); }
+    .nav-dot.done    { border-color: #22c55e; background: #22c55e; }
+
+    /* ── Main ── */
+    #view {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 32px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .hamburger { display: block; }
+      #sidebar {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        height: calc(100vh - var(--header-h));
+        z-index: 99;
+        transform: translateX(-100%);
+        transition: transform 0.25s;
+        box-shadow: 4px 0 16px rgba(0,0,0,0.1);
+      }
+      #sidebar.open { transform: translateX(0); }
+      #view { padding: 16px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Globale Arrays/Objekte definieren BEVOR die Datenskripte laufen,
-       damit die bedingten Object.assign / push-Aufrufe darin greifen -->
   <script>
     var MNEMONICS = {};
     var LERNZIELE = {};
@@ -19,18 +168,114 @@
     var TABLES    = {};
     var SUBJECTS  = {};
   </script>
-
   <script src="anatomie_data.js"></script>
   <script src="terminologie_data.js"></script>
 
-  <div id="app"></div>
+  <header id="hdr"></header>
+  <div class="shell">
+    <nav id="sidebar"></nav>
+    <main id="view"></main>
+  </div>
 
   <script>
-    // Schritt-1-Test: Anzahl der Vorlesungen in der Konsole ausgeben
-    console.log('VLs gesamt:', Object.keys(AN_META).length);          // → 12
-    console.log('Karteikarten gesamt:', AN_CARDS.length);             // → Anzahl Karten
-    console.log('Quiz-Fragen gesamt:', AN_QUIZ.length);               // → Anzahl Fragen
-    console.log('Terminologie geladen:', typeof terminologieData !== 'undefined'); // → true
+    // ── Store ──────────────────────────────────────────────────
+    const STORE = {
+      get: () => JSON.parse(localStorage.getItem('anat_progress') || '{}'),
+      set: (d) => localStorage.setItem('anat_progress', JSON.stringify(d)),
+    };
+
+    // ── Shell ──────────────────────────────────────────────────
+    function renderHeader() {
+      document.getElementById('hdr').innerHTML = `
+        <div style="display:flex;align-items:center;gap:10px">
+          <button class="hamburger" onclick="toggleSidebar()">☰</button>
+          <a href="#home" class="hdr-logo">🫀 Anatomie 1 – DPU</a>
+        </div>
+        <button id="dark-btn" onclick="toggleDark()">🌙</button>
+      `;
+    }
+
+    function renderSidebar() {
+      const progress = STORE.get();
+      const groups = (SUBJECTS.anatomie1 || {}).sidebarGroups || [];
+
+      let html = `
+        <div class="nav-section-links">
+          <a href="#home"  class="nav-link" data-route="home">🏠 Übersicht</a>
+          <a href="#termin" class="nav-link" data-route="termin">📐 Terminologie</a>
+          <a href="#pruef"  class="nav-link" data-route="pruef">🎯 Prüfungsmodus</a>
+        </div>
+        <div class="nav-divider"></div>
+      `;
+
+      for (const group of groups) {
+        html += `<div class="nav-group-label" style="color:${group.color}">${group.label}</div>`;
+        for (const item of group.items) {
+          const p = progress[item.vl] || {};
+          const dotClass = p.quizDone ? 'done' : p.visited ? 'visited' : '';
+          html += `
+            <div style="padding:0 12px">
+              <a href="#block/${item.vl}" class="nav-link" data-route="block/${item.vl}">
+                <span class="nav-dot ${dotClass}" data-dot="${item.vl}"></span>
+                <span class="nav-code">${item.code}</span>
+                ${item.title}
+              </a>
+            </div>
+          `;
+        }
+      }
+
+      document.getElementById('sidebar').innerHTML = html;
+    }
+
+    function updateActiveLink() {
+      const hash = location.hash.replace('#', '') || 'home';
+      document.querySelectorAll('.nav-link').forEach(a => {
+        const route = a.dataset.route || '';
+        a.classList.toggle('active', hash === route || (hash.startsWith('block/') && route === hash));
+      });
+    }
+
+    // ── Router ─────────────────────────────────────────────────
+    function route() {
+      const hash = location.hash || '#home';
+      updateActiveLink();
+      if (hash === '#home')              renderHome();
+      else if (hash === '#termin')       renderTermin();
+      else if (hash === '#pruef')        renderPruef();
+      else if (hash.startsWith('#block/')) renderBlock(hash.split('/')[1]);
+      else                               renderHome();
+    }
+
+    // ── Placeholder views (werden in späteren Schritten ersetzt) ──
+    function renderHome()  {
+      document.getElementById('view').innerHTML = '<p style="color:var(--muted)">Home – kommt in Schritt 3</p>';
+    }
+    function renderTermin() {
+      document.getElementById('view').innerHTML = '<p style="color:var(--muted)">Terminologie – kommt in Schritt 9</p>';
+    }
+    function renderPruef() {
+      document.getElementById('view').innerHTML = '<p style="color:var(--muted)">Prüfungsmodus – kommt in Schritt 10</p>';
+    }
+    function renderBlock(vlId) {
+      document.getElementById('view').innerHTML = `<p style="color:var(--muted)">Block <strong>${vlId}</strong> – kommt in Schritt 4</p>`;
+    }
+
+    // ── Utils ──────────────────────────────────────────────────
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+      document.getElementById('dark-btn').textContent =
+        document.body.classList.contains('dark') ? '☀️' : '🌙';
+    }
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    // ── Init ───────────────────────────────────────────────────
+    window.addEventListener('hashchange', route);
+    renderHeader();
+    renderSidebar();
+    route();
   </script>
 
 </body>
