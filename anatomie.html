@@ -19,11 +19,20 @@
       --header-h: 56px;
     }
 
+    body.dark {
+      --bg:     #0f172a;
+      --card:   #1e293b;
+      --text:   #e2e8f0;
+      --muted:  #94a3b8;
+      --border: #334155;
+    }
+
     body {
       font-family: system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      transition: background 0.2s, color 0.2s;
     }
 
     /* ── Header ── */
@@ -644,6 +653,48 @@
     .search-result-text { font-size: 0.825rem; line-height: 1.4; }
     .search-result-sub  { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
     .search-no-result   { padding: 12px 14px; font-size: 0.85rem; color: var(--muted); }
+
+    /* ── Dark Mode Overrides ── */
+    body.dark #hdr,
+    body.dark #sidebar          { background: var(--card); }
+    body.dark .search-wrap input { background: #0f172a; }
+    body.dark .flip-card-front,
+    body.dark .flip-card-back    { background: #253347; }
+    body.dark .uebersicht-card   { background: #253347; }
+    body.dark .lernziele-box     { background: #253347; }
+    body.dark .quiz-question     { background: #253347; }
+    body.dark .quiz-opt-btn      { background: #1e293b; border-color: #334155; }
+    body.dark .quiz-score-box    { background: #253347; }
+    body.dark .quiz-reset-btn    { background: #334155; border-color: #475569; }
+    body.dark tbody tr:nth-child(even) { background: #253347; }
+    body.dark .pruef-card        { background: #253347; }
+    body.dark .pruef-done        { background: #253347; }
+    body.dark .termin-card       { background: #253347; }
+    body.dark .block-card        { background: #1e293b; }
+    body.dark .block-card:hover  { box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    body.dark .karten-controls button { background: #253347; border-color: #334155; }
+    body.dark .karten-controls button:hover { background: #334155; }
+    body.dark .hero-box          { background: linear-gradient(135deg,#9f1239,#7f1d1d); }
+
+    /* ── Keyboard-Taste ── */
+    kbd {
+      display: inline-block;
+      padding: 1px 6px;
+      background: var(--border);
+      border: 1px solid var(--muted);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: inherit;
+      line-height: 1.6;
+    }
+
+    /* ── Scrollbar (Webkit) ── */
+    ::-webkit-scrollbar       { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    /* ── Fokus-Ring ── */
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     /* ── Responsive ── */
     @media (max-width: 700px) {
@@ -1429,17 +1480,29 @@
 
     // ── Utils ──────────────────────────────────────────────────
     function toggleDark() {
-      document.body.classList.toggle('dark');
-      document.getElementById('dark-btn').textContent =
-        document.body.classList.contains('dark') ? '☀️' : '🌙';
+      const isDark = document.body.classList.toggle('dark');
+      document.getElementById('dark-btn').textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('anat_dark', isDark ? '1' : '');
+    }
+
+    function applyDarkPref() {
+      if (localStorage.getItem('anat_dark')) {
+        document.body.classList.add('dark');
+      }
     }
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('open');
     }
 
     // ── Init ───────────────────────────────────────────────────
+    applyDarkPref();
     window.addEventListener('hashchange', route);
     renderHeader();
+    // Dark-Button-Icon nach renderHeader setzen (Button existiert erst jetzt)
+    if (document.body.classList.contains('dark')) {
+      const btn = document.getElementById('dark-btn');
+      if (btn) btn.textContent = '☀️';
+    }
     renderSidebar();
     route();
   </script>
