@@ -424,3 +424,7 @@ if (typeof OVERVIEW_DATA !== ‘undefined’) Object.assign(OVERVIEW_DATA, AN_OV
 if (typeof ALL_CARDS !== ‘undefined’) ALL_CARDS.push(...AN_CARDS);
 if (typeof ALL_QUIZ !== ‘undefined’) ALL_QUIZ.push(...AN_QUIZ);
 if (typeof TABLES !== ‘undefined’) Object.assign(TABLES, AN_TABLES);
+
+// Nach dem Laden den Subject-Switcher neu rendern,
+// damit Anatomie 1 sofort als Fach erscheint
+if (typeof renderSubjectSwitcher === ‘function’) renderSubjectSwitcher();
