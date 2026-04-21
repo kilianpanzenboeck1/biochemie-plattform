@@ -659,7 +659,7 @@
     body.dark #sidebar          { background: var(--card); }
     body.dark .search-wrap input { background: #0f172a; }
     body.dark .flip-card-front,
-    body.dark .flip-card-back    { background: #253347; }
+    body.dark .flip-card-back    { background: #253347; color: var(--text); }
     body.dark .uebersicht-card   { background: #253347; }
     body.dark .lernziele-box     { background: #253347; }
     body.dark .quiz-question     { background: #253347; }
@@ -794,10 +794,13 @@
     }
 
     function updateActiveLink() {
-      const hash = location.hash.replace('#', '') || 'home';
+      const hash = (location.hash || '#home').replace('#', '');
       document.querySelectorAll('.nav-link').forEach(a => {
-        const route = a.dataset.route || '';
-        a.classList.toggle('active', hash === route || (hash.startsWith('block/') && route === hash));
+        const r = a.dataset.route || '';
+        const isActive = (hash === r) ||
+                         (!hash && r === 'home') ||
+                         (hash.startsWith('block/') && r === hash);
+        a.classList.toggle('active', isActive);
       });
     }
 
@@ -805,12 +808,14 @@
     function route() {
       const hash = location.hash || '#home';
       removeKarteKeyboard();
+      // Sidebar auf Mobile schließen
+      document.getElementById('sidebar')?.classList.remove('open');
       updateActiveLink();
-      if (hash === '#home')              renderHome();
-      else if (hash === '#termin')       renderTermin();
-      else if (hash === '#pruef')        renderPruef();
+      if (hash === '#home')                renderHome();
+      else if (hash === '#termin')         renderTermin();
+      else if (hash === '#pruef')          renderPruef();
       else if (hash.startsWith('#block/')) renderBlock(hash.split('/')[1]);
-      else                               renderHome();
+      else                                 renderHome();
     }
 
     // ── Hilfsfunktionen ────────────────────────────────────────
