@@ -457,6 +457,34 @@
     }
     body.dark .quiz-explanation { background: #1e293b; }
 
+    /* ── Tabellen-Tab ── */
+    .tabellen-wrap { display: flex; flex-direction: column; gap: 24px; }
+    .tabellen-block h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .table-scroll { overflow-x: auto; border-radius: var(--radius); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      font-size: 0.875rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      min-width: 400px;
+    }
+    thead { background: var(--block-accent, var(--accent)); color: #fff; }
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: .03em;
+    }
+    td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:nth-child(even) { background: var(--bg); }
+
     /* ── Responsive ── */
     @media (max-width: 700px) {
       .hamburger { display: block; }
@@ -951,9 +979,34 @@
     function resetQuiz() {
       if (quizBlock) renderQuiz(quizBlock);
     }
+    // ── Tab: Tabellen ──────────────────────────────────────────
     function renderTabellen(block) {
+      if (!block.tabellen.length) {
+        document.getElementById('tab-content').innerHTML =
+          '<p style="color:var(--muted)">Keine Tabellen für diese VL.</p>';
+        return;
+      }
+
+      const html = block.tabellen.map(t => {
+        const headers = t.headers.map(h => `<th>${h}</th>`).join('');
+        const rows    = t.rows.map(r =>
+          `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`
+        ).join('');
+        return `
+          <div class="tabellen-block" style="--block-accent:${block.farbe}">
+            <h3>${t.title}</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr>${headers}</tr></thead>
+                <tbody>${rows}</tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      }).join('');
+
       document.getElementById('tab-content').innerHTML =
-        '<p style="color:var(--muted)">Tabellen – kommt in Schritt 8</p>';
+        `<div class="tabellen-wrap">${html}</div>`;
     }
 
     // ── Utils ──────────────────────────────────────────────────
