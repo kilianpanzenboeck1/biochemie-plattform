@@ -471,9 +471,10 @@ border-radius: var(–radius-xl);
 padding: var(–space-8) var(–space-10);
 display: flex;
 flex-direction: column;
-justify-content: center;
+justify-content: flex-start;
 align-items: center;
 text-align: center;
+overflow-y: auto;
 border: 1px solid var(–border);
 box-shadow: var(–shadow-md);
 }
@@ -6134,9 +6135,10 @@ function runSearch() {
   // Search overview topics
   if (typeof OVERVIEW_DATA !== 'undefined') {
     Object.entries(OVERVIEW_DATA).forEach(([vl, data]) => {
-      if (!data || !data.topics) return;
+      const topics = data && (data.topics || data.themes);
+      if (!topics) return;
       const meta = typeof VL_META !== 'undefined' ? VL_META[vl] : null;
-      data.topics.forEach(topic => {
+      topics.forEach(topic => {
         const inTitle = topic.title.toLowerCase().includes(q);
         const inPoints = topic.points.some(p => p.toLowerCase().includes(q));
         if (inTitle || inPoints) {
@@ -6503,17 +6505,18 @@ function renderOverview() {
   for (const vl of vlsToShow) {
     const meta = VL_META[vl];
     const data = OVERVIEW_DATA[vl];
-    if (!data) continue;
+    if (!data || !meta) continue;
 
     const lernziele = typeof LERNZIELE !== 'undefined' ? LERNZIELE[vl] : null;
     const mnemonic = typeof MNEMONICS !== 'undefined' ? MNEMONICS[vl] : null;
+    const topics = data.topics || data.themes || [];
 
     html += `
     <div style="margin-bottom:var(--space-10)">
       <div class="vl-hero">
         <div class="vl-badge">${meta.label}</div>
         <div class="vl-hero-content">
-          <h1>${meta.emoji} ${meta.title}</h1>
+          <h1>${meta.emoji ? meta.emoji + ' ' : ''}${meta.title || meta.label}</h1>
           <p>Überblick über die wichtigsten Inhalte, Konzepte und klinischen Bezüge dieser Vorlesung.</p>
         </div>
       </div>
@@ -6538,7 +6541,7 @@ function renderOverview() {
       <div class="overview-grid">
     `;
 
-    for (const topic of data.topics) {
+    for (const topic of topics) {
       html += `
         <div class="topic-card">
           <div class="topic-card-header">
