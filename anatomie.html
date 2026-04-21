@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anatomie 1 – DPU Lernplattform</title>
+</head>
+<body>
+
+  <!-- Globale Arrays/Objekte definieren BEVOR die Datenskripte laufen,
+       damit die bedingten Object.assign / push-Aufrufe darin greifen -->
+  <script>
+    var MNEMONICS = {};
+    var LERNZIELE = {};
+    var VL_META   = {};
+    var OVERVIEW_DATA = {};
+    var ALL_CARDS = [];
+    var ALL_QUIZ  = [];
+    var TABLES    = {};
+    var SUBJECTS  = {};
+  </script>
+
+  <script src="anatomie_data.js"></script>
+  <script src="terminologie_data.js"></script>
+
+  <div id="app"></div>
+
+  <script>
+    // Schritt-1-Test: Anzahl der Vorlesungen in der Konsole ausgeben
+    console.log('VLs gesamt:', Object.keys(AN_META).length);          // → 12
+    console.log('Karteikarten gesamt:', AN_CARDS.length);             // → Anzahl Karten
+    console.log('Quiz-Fragen gesamt:', AN_QUIZ.length);               // → Anzahl Fragen
+    console.log('Terminologie geladen:', typeof terminologieData !== 'undefined'); // → true
+  </script>
+
+</body>
+</html>
