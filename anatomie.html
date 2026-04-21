@@ -287,6 +287,99 @@
     }
     body.dark .mnemonic-box { background: #422006; border-color: #a16207; }
 
+    /* ── Karteikarten-Tab ── */
+    .karten-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .flip-card {
+      width: 100%;
+      max-width: 620px;
+      cursor: pointer;
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      display: grid;
+      transform-style: preserve-3d;
+      transition: transform 0.45s ease;
+      border-radius: var(--radius);
+      min-height: 220px;
+    }
+    .flip-card-inner.flipped { transform: rotateY(180deg); }
+    .flip-card-front,
+    .flip-card-back {
+      grid-area: 1 / 1;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .flip-card-back { transform: rotateY(180deg); }
+    .karte-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--block-accent, var(--accent));
+      margin-bottom: 12px;
+    }
+    .karte-text {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+    .karte-cat {
+      margin-top: 16px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .karten-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .karten-controls button {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: background 0.15s;
+    }
+    .karten-controls button:hover { background: var(--bg); }
+    .karten-counter { font-size: 0.875rem; color: var(--muted); min-width: 60px; text-align: center; }
+
+    .karten-dots {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 620px;
+    }
+    .karten-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.2s;
+    }
+    .karten-dot.current { background: var(--block-accent, var(--accent)); }
+    .karten-dot.seen    { background: var(--muted); }
+
+    .flip-hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
     /* ── Responsive ── */
     @media (max-width: 700px) {
       .hamburger { display: block; }
@@ -388,6 +481,7 @@
     // ── Router ─────────────────────────────────────────────────
     function route() {
       const hash = location.hash || '#home';
+      removeKarteKeyboard();
       updateActiveLink();
       if (hash === '#home')              renderHome();
       else if (hash === '#termin')       renderTermin();
@@ -583,9 +677,120 @@
         ${mnemonic}
       `;
     }
+    // ── Tab: Karteikarten ──────────────────────────────────────
+    let karteIdx     = 0;
+    let karteOrder   = [];
+    let karteFlipped = false;
+    let karteKeyHandler = null;
+    let karteBlock   = null;
+
+    function removeKarteKeyboard() {
+      if (karteKeyHandler) {
+        document.removeEventListener('keydown', karteKeyHandler);
+        karteKeyHandler = null;
+      }
+    }
+
+    function addKarteKeyboard() {
+      removeKarteKeyboard();
+      karteKeyHandler = (e) => {
+        if (['Space','ArrowUp','ArrowDown'].includes(e.code)) { e.preventDefault(); flipKarte(); }
+        else if (e.code === 'ArrowLeft')  { e.preventDefault(); prevKarte(); }
+        else if (e.code === 'ArrowRight') { e.preventDefault(); nextKarte(); }
+      };
+      document.addEventListener('keydown', karteKeyHandler);
+    }
+
+    function flipKarte() {
+      karteFlipped = !karteFlipped;
+      document.querySelector('.flip-card-inner')?.classList.toggle('flipped', karteFlipped);
+    }
+
+    function updateKarteView() {
+      const cards = karteBlock.karteikarten;
+      const idx   = karteOrder[karteIdx];
+      const card  = cards[idx];
+      karteFlipped = false;
+
+      const inner = document.querySelector('.flip-card-inner');
+      if (inner) {
+        inner.classList.remove('flipped');
+        inner.querySelector('.flip-card-front .karte-text').textContent = card.q;
+        inner.querySelector('.flip-card-back  .karte-text').textContent = card.a;
+        inner.querySelector('.flip-card-back  .karte-cat').textContent  = card.cat || '';
+      }
+
+      const counter = document.querySelector('.karten-counter');
+      if (counter) counter.textContent = `${karteIdx + 1} / ${cards.length}`;
+
+      document.querySelectorAll('.karten-dot').forEach((d, i) => {
+        d.classList.toggle('current', i === karteIdx);
+        d.classList.toggle('seen',    i < karteIdx);
+      });
+    }
+
+    function nextKarte() {
+      if (karteIdx < karteBlock.karteikarten.length - 1) { karteIdx++; updateKarteView(); }
+    }
+    function prevKarte() {
+      if (karteIdx > 0) { karteIdx--; updateKarteView(); }
+    }
+    function shuffleKarten() {
+      for (let i = karteOrder.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [karteOrder[i], karteOrder[j]] = [karteOrder[j], karteOrder[i]];
+      }
+      karteIdx = 0;
+      updateKarteView();
+    }
+
     function renderKarten(block) {
-      document.getElementById('tab-content').innerHTML =
-        '<p style="color:var(--muted)">Karteikarten – kommt in Schritt 6</p>';
+      karteBlock   = block;
+      karteIdx     = 0;
+      karteFlipped = false;
+      karteOrder   = block.karteikarten.map((_, i) => i);
+
+      if (!block.karteikarten.length) {
+        document.getElementById('tab-content').innerHTML =
+          '<p style="color:var(--muted)">Keine Karteikarten für diese VL.</p>';
+        return;
+      }
+
+      const first = block.karteikarten[0];
+      const dots  = block.karteikarten.map((_, i) =>
+        `<div class="karten-dot${i === 0 ? ' current' : ''}"></div>`
+      ).join('');
+
+      document.getElementById('tab-content').innerHTML = `
+        <div class="karten-wrap" style="--block-accent:${block.farbe}">
+          <div class="flip-card" onclick="flipKarte()">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="karte-label">Frage</div>
+                <div class="karte-text">${first.q}</div>
+              </div>
+              <div class="flip-card-back">
+                <div class="karte-label">Antwort</div>
+                <div class="karte-text">${first.a}</div>
+                <div class="karte-cat">${first.cat || ''}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-hint">Klick auf Karte oder <kbd>Space</kbd> zum Umdrehen · <kbd>←</kbd><kbd>→</kbd> navigieren</div>
+
+          <div class="karten-controls">
+            <button onclick="prevKarte()">← Zurück</button>
+            <span class="karten-counter">1 / ${block.karteikarten.length}</span>
+            <button onclick="nextKarte()">Weiter →</button>
+            <button onclick="shuffleKarten()">🔀 Shuffle</button>
+          </div>
+
+          <div class="karten-dots">${dots}</div>
+        </div>
+      `;
+
+      addKarteKeyboard();
     }
     function renderQuiz(block) {
       document.getElementById('tab-content').innerHTML =
