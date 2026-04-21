@@ -360,7 +360,7 @@ if (typeof SUBJECTS !== ‘undefined’) {
 SUBJECTS[‘anatomie1’] = {
 id: ‘anatomie1’,
 name: ‘Anatomie 1’,
-subtitle: ‘DP4U Studyhub’,
+subtitle: ‘DPU Vorklinik’,
 icon: ‘🫀’,
 accentColor: ‘#e11d48’,
 localStoragePrefix: ‘anatomie1’,

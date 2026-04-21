@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biochemie – DP4U Studyhub</title>
+<title>DP4U – Studyhub | DPU Vorklinik</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="design_upgrade.css" rel="stylesheet">
@@ -27,6 +27,21 @@
   --font-body: 'Inter', system-ui, sans-serif;
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --content-default: 1100px;
+  --color-primary: #C9943A;
+  --color-primary-light: #F0C060;
+  --color-sidebar-bg: #1a1a2e;
+}
+
+/* ===== BRANDING OVERRIDES (double-dash, valid CSS custom props) ===== */
+[data-theme="dark"],
+[data-theme="light"] {
+  --accent:      var(--color-primary);
+  --accent-hover:var(--color-primary-light);
+  --accent-bg:   rgba(201,148,58,0.10);
+  --accent-glow: rgba(201,148,58,0.22);
+}
+[data-theme="light"] {
+  --sidebar-bg: var(--color-sidebar-bg);
 }
 
 [data-theme=“dark”] {
@@ -39,10 +54,10 @@
 –text: #2C2C2C;
 –text-muted: #6B6560;
 –text-faint: #A89E94;
-–accent: #B8962E;
-–accent-hover: #D4AC3A;
-–accent-bg: rgba(184,150,46,0.14);
-–accent-glow: rgba(184,150,46,0.28);
+–accent: #C9943A;
+–accent-hover: #F0C060;
+–accent-bg: rgba(201,148,58,0.14);
+–accent-glow: rgba(201,148,58,0.28);
 –dpu-navy: #1B2A6B;
 –dpu-navy-deep: #131f52;
 –dpu-navy-mid: #243480;
@@ -81,17 +96,17 @@
 –text: #111827;
 –text-muted: #4b5680;
 –text-faint: #9099bc;
-–accent: #A8842A;
-–accent-hover: #C9A84C;
-–accent-bg: rgba(168,132,42,0.1);
-–accent-glow: rgba(168,132,42,0.25);
+–accent: #C9943A;
+–accent-hover: #F0C060;
+–accent-bg: rgba(201,148,58,0.1);
+–accent-glow: rgba(201,148,58,0.25);
 –dpu-navy: #6B5010;
 –dpu-navy-deep: #4A3808;
 –dpu-navy-mid: #8B6914;
 –dpu-silver: #E8C97A;
 –dpu-silver-dim: rgba(201,168,76,0.12);
-–sidebar-bg: #1A1510;
-–sidebar-border: #2C2218;
+–sidebar-bg: #1a1a2e;
+–sidebar-border: #252545;
 –green: #16a34a;
 –green-bg: rgba(22,163,74,0.1);
 –red: #dc2626;
@@ -1267,10 +1282,10 @@ background: #F0EAE0;
 border-right-color: #D8CCBB;
 box-shadow: 4px 0 24px rgba(0,0,0,0.12);
 }
-/* Light mode sidebar: DP4U dark gold */
+/* Light mode sidebar: DP4U Studyhub dark navy */
 [data-theme=”light”] .sidebar {
-background: #1A1510;
-border-right-color: #2C2218;
+background: var(--color-sidebar-bg, #1a1a2e);
+border-right-color: #252545;
 box-shadow: 4px 0 24px rgba(0,0,0,0.2);
 }
 
@@ -1953,10 +1968,10 @@ letter-spacing: 0.03em;
   <!-- Logo -->
 
   <div class="sidebar-logo">
-          <img src="dp4u-logo.svg" alt="DP4U Studyhub Logo" class="sidebar-logo-img" style="background:transparent;border-radius:10px;">
+          <img src="assets/dp4u_logo.svg" alt="DP4U Logo" width="48" height="48" class="sidebar-logo-img" style="background:transparent;border-radius:10px;">
     <div class="sidebar-logo-text">
-      <span class="sidebar-logo-title" id="sidebar-logo-title">Biochemie</span>
-      <span class="sidebar-logo-sub" id="sidebar-logo-sub">DP4U Studyhub</span>
+      <span class="sidebar-logo-title" id="sidebar-logo-title">DP4U – Studyhub</span>
+      <span class="sidebar-logo-sub" id="sidebar-logo-sub">DPU Vorklinik</span>
     </div>
   </div>
 
@@ -2016,8 +2031,8 @@ letter-spacing: 0.03em;
     <button class="mobile-menu-btn" id="sidebar-open-btn" aria-label="Menü öffnen">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
-    <img src="dp4u-logo.svg" alt="DP4U Studyhub Logo" class="mobile-logo-img" style="border-radius:6px;"/>
-    <span class="mobile-logo-label">Biochemie · DP4U</span>
+    <img src="assets/dp4u_logo.svg" alt="DP4U Logo" width="28" height="28" class="mobile-logo-img" style="border-radius:6px;"/>
+    <span class="mobile-logo-label">DP4U – Studyhub</span>
   </div>
 
   <!-- Tab bar (inside main column, sticky) -->
@@ -6275,7 +6290,7 @@ const SUBJECTS = {
   biochemie: {
     id: 'biochemie',
     name: 'Biochemie',
-    subtitle: 'DP4U Studyhub',
+    subtitle: 'DPU Vorklinik',
     icon: '🧬',
     accentColor: '#5b80f5',
     localStoragePrefix: 'biochemie',
@@ -7007,14 +7022,8 @@ function switchSubject(subjectId) {
   // Update storage keys
   updateStorageKeys(subjectId);
 
-  // Update logo text
-  const titleEl = document.getElementById('sidebar-logo-title');
-  const subEl = document.getElementById('sidebar-logo-sub');
-  if (titleEl) titleEl.textContent = subject.name;
-  if (subEl) subEl.textContent = subject.subtitle;
-
-  // Update page title
-  document.title = subject.name + ' – DP4U Studyhub';
+  // Update page title (sidebar branding stays fixed)
+  document.title = 'DP4U – Studyhub | DPU Vorklinik';
 
   // Set first VL of this subject as active
   const firstGroup = subject.sidebarGroups[0];
