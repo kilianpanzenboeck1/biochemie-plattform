@@ -1,4 +1,4 @@
-// KI-Chat – DPU Vorklinik Lernassistent (Claude API)
+// KI-Chat – DP4U Studyhub Lernassistent (Claude API)
 (function () {
   'use strict';
 
@@ -29,7 +29,7 @@
     } catch (_) {}
 
     return (
-      'Du bist ein präziser Lernassistent für Medizinstudierende der DPU Vorklinik.\n' +
+      'Du bist ein präziser Lernassistent für Medizinstudierende auf DP4U Studyhub.\n' +
       'Fach: ' + subjectLabel + (vlLabel ? ' — Thema: ' + vlLabel : '') + '.\n' +
       'Regeln:\n' +
       '- Antworte immer auf Deutsch\n' +
@@ -93,7 +93,7 @@
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
       </div>
-      <p class="ki-welcome-text">Hallo! Ich helfe dir beim Lernen für die DPU Vorklinik. Stell mir eine Frage zu deinem aktuellen Thema.</p>
+      <p class="ki-welcome-text">Hallo! Ich helfe dir beim Lernen auf DP4U Studyhub. Stell mir eine Frage zu deinem aktuellen Thema.</p>
     </div>
   </div>
 
@@ -155,7 +155,7 @@
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
           </div>
-          <p class="ki-welcome-text">Hallo! Ich helfe dir beim Lernen für die DPU Vorklinik. Stell mir eine Frage zu deinem aktuellen Thema.</p>
+          <p class="ki-welcome-text">Hallo! Ich helfe dir beim Lernen auf DP4U Studyhub. Stell mir eine Frage zu deinem aktuellen Thema.</p>
         </div>`;
       return;
     }

@@ -1,5 +1,5 @@
 // =========================================================
-// ANATOMIE 1 – DPU Vorklinik
+// ANATOMIE 1 – DP4U Studyhub
 // Modul: Bewegungsapparat & Topographische Anatomie
 // =========================================================
 
@@ -360,7 +360,7 @@ if (typeof SUBJECTS !== ‘undefined’) {
 SUBJECTS[‘anatomie1’] = {
 id: ‘anatomie1’,
 name: ‘Anatomie 1’,
-subtitle: ‘DPU Vorklinik’,
+subtitle: ‘DP4U Studyhub’,
 icon: ‘🫀’,
 accentColor: ‘#e11d48’,
 localStoragePrefix: ‘anatomie1’,
