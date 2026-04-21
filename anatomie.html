@@ -138,6 +138,49 @@
       padding: 28px 32px;
     }
 
+    /* ── Home ── */
+    .hero-box {
+      background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 28px;
+    }
+    .hero-box h1 { font-size: 1.6rem; margin-bottom: 4px; }
+    .hero-box p  { opacity: 0.85; margin-bottom: 16px; }
+    .hero-stats  { display: flex; gap: 24px; flex-wrap: wrap; }
+    .hero-stat   { text-align: center; }
+    .hero-stat strong { display: block; font-size: 1.8rem; font-weight: 800; }
+    .hero-stat span   { font-size: 0.8rem; opacity: 0.8; }
+
+    .block-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .block-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+    }
+    .block-card:hover {
+      border-color: var(--card-accent, var(--accent));
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+    .block-card-emoji { font-size: 2rem; margin-bottom: 8px; }
+    .block-card-code  { font-size: 0.7rem; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .block-card-title { font-size: 0.95rem; font-weight: 600; margin: 2px 0 6px; }
+    .progress-wrap { background: var(--border); border-radius: 99px; height: 5px; margin-top: 12px; }
+    .progress-bar  { height: 5px; border-radius: 99px; background: var(--card-accent, var(--accent)); transition: width 0.3s; }
+
     /* ── Responsive ── */
     @media (max-width: 700px) {
       .hamburger { display: block; }
@@ -247,9 +290,69 @@
       else                               renderHome();
     }
 
-    // ── Placeholder views (werden in späteren Schritten ersetzt) ──
-    function renderHome()  {
-      document.getElementById('view').innerHTML = '<p style="color:var(--muted)">Home – kommt in Schritt 3</p>';
+    // ── Hilfsfunktionen ────────────────────────────────────────
+    function vlEmoji(vlId) {
+      const themes = (AN_OVERVIEW[vlId] || {}).themes || [];
+      return themes[0] ? themes[0].icon : '📚';
+    }
+
+    function vlProgress(vlId) {
+      const p = STORE.get()[vlId] || {};
+      if (p.quizDone)  return 100;
+      if (p.visited)   return 33;
+      return 0;
+    }
+
+    // Gruppenfarbe anhand der Sidebar-Gruppen ermitteln
+    function groupColor(vlId) {
+      const groups = (SUBJECTS.anatomie1 || {}).sidebarGroups || [];
+      for (const g of groups) {
+        if (g.items.some(i => i.vl === vlId)) return g.color;
+      }
+      return '#6b7280';
+    }
+
+    // ── Home-View ──────────────────────────────────────────────
+    function renderHome() {
+      const groups  = (SUBJECTS.anatomie1 || {}).sidebarGroups || [];
+      const allVLs  = groups.flatMap(g => g.items);
+      const totalCards = AN_CARDS.length + terminologieData.karteikarten.length;
+      const totalQuiz  = AN_QUIZ.length  + terminologieData.quiz.length;
+
+      let html = `
+        <div class="hero-box">
+          <h1>🫀 Anatomie 1 – Skelettanatomie</h1>
+          <p>DPU Med · Modul Bewegungsapparat &amp; Topographische Anatomie</p>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>${allVLs.length}</strong><span>Vorlesungen</span></div>
+            <div class="hero-stat"><strong>${totalCards}</strong><span>Karteikarten</span></div>
+            <div class="hero-stat"><strong>${totalQuiz}</strong><span>Quiz-Fragen</span></div>
+          </div>
+        </div>
+      `;
+
+      for (const group of groups) {
+        html += `<h2 style="font-size:0.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:${group.color};margin:20px 0 10px">${group.label}</h2>`;
+        html += '<div class="block-grid">';
+        for (const item of group.items) {
+          const pct   = vlProgress(item.vl);
+          const color = groupColor(item.vl);
+          const cards = AN_CARDS.filter(c => c.vl === item.vl).length;
+          const quiz  = AN_QUIZ.filter(q => q.vl === item.vl).length;
+          html += `
+            <a href="#block/${item.vl}" class="block-card" style="--card-accent:${color}">
+              <div class="block-card-emoji">${vlEmoji(item.vl)}</div>
+              <div class="block-card-code">${item.code}</div>
+              <div class="block-card-title">${item.title}</div>
+              <div style="font-size:0.75rem;color:var(--muted)">${cards} Karten · ${quiz} Fragen</div>
+              <div class="progress-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>
+            </a>
+          `;
+        }
+        html += '</div>';
+      }
+
+      document.getElementById('view').innerHTML = html;
     }
     function renderTermin() {
       document.getElementById('view').innerHTML = '<p style="color:var(--muted)">Terminologie – kommt in Schritt 9</p>';
