@@ -1,7 +1,7 @@
 {
-  "name": "biochemie-lernplattform-dpu",
+  "name": "dp4u-studyhub",
   "version": "2.0.0",
-  "description": "Interaktive Biochemie-Lernplattform für DPU Vorklinik – Karteikarten, Quiz, Prüfungsmodus (SRS), Suchfunktion, Statistiken",
+  "description": "DP4U Studyhub – Interaktive Lernplattform für Medizinstudierende: Karteikarten, Quiz, Prüfungsmodus (SRS), Suchfunktion, Statistiken",
   "homepage": ".",
   "private": true,
   "scripts": {
@@ -16,9 +16,10 @@
     "vorklinik",
     "flashcards",
     "spaced-repetition",
-    "DPU"
+    "DP4U",
+    "studyhub"
   ],
-  "author": "DPU Vorklinik",
+  "author": "DP4U Studyhub",
   "license": "MIT",
   "engines": {
     "node": ">=14"
