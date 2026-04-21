@@ -485,6 +485,29 @@
     tbody tr:last-child td { border-bottom: none; }
     tbody tr:nth-child(even) { background: var(--bg); }
 
+    /* ── Terminologie-View ── */
+    .termin-header {
+      margin-bottom: 20px;
+    }
+    .termin-header h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .termin-header p  { color: var(--muted); font-size: 0.875rem; }
+
+    .termin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 12px;
+    }
+    .termin-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .termin-card strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+    .termin-card span   { font-size: 0.8rem; color: var(--muted); line-height: 1.4; display: block; }
+    .termin-card .lat   { color: #2563eb; }
+    body.dark .termin-card .lat { color: #60a5fa; }
+
     /* ── Responsive ── */
     @media (max-width: 700px) {
       .hamburger { display: block; }
@@ -659,8 +682,67 @@
 
       document.getElementById('view').innerHTML = html;
     }
+    // ── Terminologie-View ──────────────────────────────────────
+    let terminTab = 'lage';
+
+    function switchTerminTab(tab) {
+      terminTab = tab;
+      document.querySelectorAll('.termin-tab-btn').forEach(b =>
+        b.classList.toggle('active', b.dataset.tab === tab)
+      );
+      renderTerminContent(tab);
+    }
+
+    function renderTerminContent(tab) {
+      const area = document.getElementById('termin-content');
+      if (tab === 'lage') {
+        const cards = terminologieData.lagebezeichnungen.map(e => `
+          <div class="termin-card">
+            <strong>${e.term}</strong>
+            <span>${e.bedeutung}</span>
+          </div>
+        `).join('');
+        area.innerHTML = `<div class="termin-grid">${cards}</div>`;
+
+      } else if (tab === 'bewegung') {
+        const headers = '<tr><th>Bewegung</th><th>Erklärung</th></tr>';
+        const rows = terminologieData.bewegungsrichtungen.map(e =>
+          `<tr><td><strong>${e.bewegung}</strong></td><td>${e.erklaerung}</td></tr>`
+        ).join('');
+        area.innerHTML = `
+          <div class="table-scroll" style="--block-accent:#6366f1">
+            <table>
+              <thead>${headers}</thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>`;
+
+      } else if (tab === 'glossar') {
+        const cards = terminologieData.glossar.map(e => `
+          <div class="termin-card">
+            <strong class="lat">${e.lat}</strong>
+            <span>${e.de}</span>
+          </div>
+        `).join('');
+        area.innerHTML = `<div class="termin-grid">${cards}</div>`;
+      }
+    }
+
     function renderTermin() {
-      document.getElementById('view').innerHTML = '<p style="color:var(--muted)">Terminologie – kommt in Schritt 9</p>';
+      terminTab = 'lage';
+      document.getElementById('view').innerHTML = `
+        <div class="termin-header">
+          <h2>📐 Terminologie</h2>
+          <p>Anatomische Lage- und Bewegungsbezeichnungen sowie Latein-Glossar</p>
+        </div>
+        <div class="tabs" style="--block-accent:#6366f1">
+          <button class="tab-btn termin-tab-btn active" data-tab="lage"     onclick="switchTerminTab('lage')">📍 Lagebezeichnungen</button>
+          <button class="tab-btn termin-tab-btn"        data-tab="bewegung" onclick="switchTerminTab('bewegung')">🔄 Bewegungsrichtungen</button>
+          <button class="tab-btn termin-tab-btn"        data-tab="glossar"  onclick="switchTerminTab('glossar')">🔤 Latein-Glossar</button>
+        </div>
+        <div id="termin-content"></div>
+      `;
+      renderTerminContent('lage');
     }
     function renderPruef() {
       document.getElementById('view').innerHTML = '<p style="color:var(--muted)">Prüfungsmodus – kommt in Schritt 10</p>';
