@@ -421,6 +421,6 @@ items: [
 // =========================================================
 if (typeof VL_META !== ‘undefined’) Object.assign(VL_META, AN_META);
 if (typeof OVERVIEW_DATA !== ‘undefined’) Object.assign(OVERVIEW_DATA, AN_OVERVIEW);
-if (typeof ALL_CARDS !== ‘undefined’) ALL_CARDS.push(…AN_CARDS);
-if (typeof ALL_QUIZ !== ‘undefined’) ALL_QUIZ.push(…AN_QUIZ);
+if (typeof ALL_CARDS !== ‘undefined’) ALL_CARDS.push(...AN_CARDS);
+if (typeof ALL_QUIZ !== ‘undefined’) ALL_QUIZ.push(...AN_QUIZ);
 if (typeof TABLES !== ‘undefined’) Object.assign(TABLES, AN_TABLES);
