@@ -7056,6 +7056,12 @@ function switchSubject(subjectId) {
   refreshCurrentTab();
 }
 
+</script>
+<!-- Subject data modules: must load BEFORE INIT so SUBJECTS registry is complete
+     when renderSubjectSwitcher() / renderSidebarNav() are first called -->
+<script src="anatomie_data.js"></script>
+<script src="terminologie_data.js"></script>
+<script>
 // =========================================================
 // INIT
 // =========================================================
@@ -7180,7 +7186,6 @@ if (typeof initAllFeatures === 'function') initAllFeatures();
   });
 })();
 </script>
-<script src="anatomie_data.js"></script>
 <script src="ki_chat.js"></script>
 </body>
 </html>
